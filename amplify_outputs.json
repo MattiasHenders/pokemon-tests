@@ -1,0 +1,280 @@
+{
+  "auth": {
+    "user_pool_id": "us-west-2_rSPFSjqLu",
+    "aws_region": "us-west-2",
+    "user_pool_client_id": "6s9oo2g0gp85brvgl08b9ril18",
+    "identity_pool_id": "us-west-2:cc92d8df-f185-4a91-8658-6735caf131bb",
+    "mfa_methods": [],
+    "standard_required_attributes": ["email"],
+    "username_attributes": ["email"],
+    "user_verification_types": ["email"],
+    "groups": [],
+    "mfa_configuration": "NONE",
+    "password_policy": {
+      "min_length": 8,
+      "require_lowercase": true,
+      "require_numbers": true,
+      "require_symbols": true,
+      "require_uppercase": true
+    },
+    "unauthenticated_identities_enabled": true
+  },
+  "data": {
+    "url": "https://c4rj2z2gwzhnvhlsjceqhwbery.appsync-api.us-west-2.amazonaws.com/graphql",
+    "aws_region": "us-west-2",
+    "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
+    "authorization_types": ["AWS_IAM"],
+    "model_introspection": {
+      "version": 1,
+      "models": {
+        "DailyTest": {
+          "name": "DailyTest",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "easyQuestion": {
+              "name": "easyQuestion",
+              "isArray": false,
+              "type": {
+                "nonModel": "PokemonQuestion"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "mediumQuestion": {
+              "name": "mediumQuestion",
+              "isArray": false,
+              "type": {
+                "nonModel": "PokemonQuestion"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "hardQuestion": {
+              "name": "hardQuestion",
+              "isArray": false,
+              "type": {
+                "nonModel": "PokemonQuestion"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "impossibleQuestion": {
+              "name": "impossibleQuestion",
+              "isArray": false,
+              "type": {
+                "nonModel": "PokemonQuestion"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "DailyTests",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": ["id"]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "allow": "public",
+                    "provider": "iam",
+                    "operations": ["read"]
+                  },
+                  {
+                    "allow": "private",
+                    "operations": ["read"]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "UserTests": {
+          "name": "UserTests",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "testId": {
+              "name": "testId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "easyAnswer": {
+              "name": "easyAnswer",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "mediumAnswer": {
+              "name": "mediumAnswer",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "hardAnswer": {
+              "name": "hardAnswer",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "impossibleAnswer": {
+              "name": "impossibleAnswer",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "UserTests",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": ["id"]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "userId",
+                    "allow": "owner",
+                    "operations": ["create", "read", "update"],
+                    "identityClaim": "cognito:username"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        }
+      },
+      "enums": {
+        "PokemonQuestionDifficulty": {
+          "name": "PokemonQuestionDifficulty",
+          "values": ["easy", "medium", "hard", "impossible", "error"]
+        }
+      },
+      "nonModels": {
+        "PokemonQuestion": {
+          "name": "PokemonQuestion",
+          "fields": {
+            "pokemonToGuess": {
+              "name": "pokemonToGuess",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "question": {
+              "name": "question",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "difficulty": {
+              "name": "difficulty",
+              "isArray": false,
+              "type": {
+                "enum": "PokemonQuestionDifficulty"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "validPokemon": {
+              "name": "validPokemon",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "version": "1.3"
+}
