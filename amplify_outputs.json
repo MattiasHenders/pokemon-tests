@@ -273,6 +273,14 @@
               "isRequired": false,
               "attributes": []
             },
+            "pokemonCaught": {
+              "name": "pokemonCaught",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
             "createdAt": {
               "name": "createdAt",
               "isArray": false,
@@ -330,8 +338,8 @@
             "sortKeyFieldNames": []
           }
         },
-        "UserAwards": {
-          "name": "UserAwards",
+        "UserAcheivements": {
+          "name": "UserAcheivements",
           "fields": {
             "id": {
               "name": "id",
@@ -386,7 +394,7 @@
             }
           },
           "syncable": true,
-          "pluralName": "UserAwards",
+          "pluralName": "UserAcheivements",
           "attributes": [
             {
               "type": "model",

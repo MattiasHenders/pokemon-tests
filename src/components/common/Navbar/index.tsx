@@ -36,34 +36,34 @@ function ResponsiveAppBar() {
     <Box sx={{ backgroundColor: palette.primary.dark, width: '100vw' }}>
       <Container maxWidth="md">
         <Toolbar disableGutters>
-          {/* <Link href={'/'}> */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <Image
-              src="/img/balls/poke.webp"
-              width={50}
-              height={50}
-              alt="pokeball logo"
-            />
+            <Link href={'/'}>
+              <Image
+                src="/img/balls/poke.webp"
+                width={50}
+                height={50}
+                alt="pokeball logo"
+              />
+            </Link>
           </Box>
-          {/* </Link> */}
-          {/* <Link href={'/'}> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: palette.primary.lightText,
-              textDecoration: 'none',
-            }}
-          >
-            WITP
-          </Typography>
-          {/* </Link> */}
+          <Box sx={{ mr: 2 }}>
+            <Link href={'/'}>
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: palette.primary.lightText,
+                  textDecoration: 'none',
+                }}
+              >
+                WITP
+              </Typography>
+            </Link>
+          </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"

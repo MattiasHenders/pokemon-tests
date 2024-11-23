@@ -42,12 +42,13 @@ const schema = a.schema({
       id: a.id(),
       userId: a.string(),
       points: a.integer(),
+      pokemonCaught: a.string().array(),
     })
     .authorization((allow) => [
       allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
     ]),
 
-  UserAwards: a
+  UserAcheivements: a
     .model({
       id: a.id(),
       userId: a.string(),
@@ -58,8 +59,6 @@ const schema = a.schema({
     .authorization((allow) => [
       allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
     ]),
-
-  // Functions
 })
 
 export type Schema = ClientSchema<typeof schema>

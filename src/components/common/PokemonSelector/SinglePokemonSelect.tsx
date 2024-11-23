@@ -2,9 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Box } from '@mui/material'
 import { Species } from '@pkmn/dex'
-
 import { Sprites } from '@pkmn/img'
-import { palette } from '@/styles/palette'
 
 type SinglePokemonSelectProps = {
   pokemon: Species

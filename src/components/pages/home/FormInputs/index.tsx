@@ -6,6 +6,8 @@ import ResultsMessage from './ResultsMessage'
 import StyledButton from '../../../common/StyledButton'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 import { upsertUserTest } from '@/requests/UserTests'
+import { GameType, useGameTypeStore } from '@/src/stores/game'
+import { useRouter } from 'next/router'
 
 export default () => {
   const { pokemonQuestions, currentQuestion, setCurrentQuestion } =
@@ -19,14 +21,16 @@ export default () => {
     setDisplayAnswer,
   } = useAnswerStore()
   const { selectedPokemon, setSelectedPokemon, clearInput } = useInputStore()
+  const { gameType } = useGameTypeStore()
   const { user } = useAuthenticator()
+  const router = useRouter()
 
   if (!currentQuestion) {
     return <></>
   }
 
   const handleClick = async () => {
-    if (user !== undefined) {
+    if (gameType === GameType.DAILY_PUZZLE && user !== undefined) {
       handleSubmitUserAnswer()
     }
 
@@ -35,7 +39,15 @@ export default () => {
       invalidGuess ||
       (displayAnswer && currentQuestion.difficulty === 'impossible')
     ) {
-      return window.location.reload()
+      if (gameType === GameType.UNLIMITED) {
+        return window.location.reload()
+      } else {
+        clearInput()
+        setSelectedPokemon(null)
+        setDisplayAnswer(false)
+        setIsEqualPokemon(null)
+        return router.push('/unlimited')
+      }
     }
     if (!displayAnswer) {
       return calculateResults()
@@ -115,12 +127,20 @@ export default () => {
       return 'Lock In'
     }
     if (invalidGuess) {
-      return 'Reset Game'
+      if (gameType === GameType.UNLIMITED) {
+        return 'Reset Game'
+      } else {
+        return 'Play Unlimited'
+      }
     }
     if (!isEqualPokemon && currentQuestion.difficulty !== 'impossible') {
       return 'Next Question'
     } else {
-      return 'Reset Game'
+      if (gameType === GameType.UNLIMITED) {
+        return 'Reset Game'
+      } else {
+        return 'Play Unlimited'
+      }
     }
   }
 
