@@ -37,6 +37,28 @@ const schema = a.schema({
       allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
     ]),
 
+  UserStats: a
+    .model({
+      id: a.id(),
+      userId: a.string(),
+      points: a.integer(),
+    })
+    .authorization((allow) => [
+      allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
+    ]),
+
+  UserAwards: a
+    .model({
+      id: a.id(),
+      userId: a.string(),
+      name: a.string(),
+      description: a.string(),
+      image: a.string(),
+    })
+    .authorization((allow) => [
+      allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
+    ]),
+
   // Functions
 })
 
