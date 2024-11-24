@@ -6,7 +6,7 @@ import { Schema } from '../../../data/resource'
 import { Amplify } from 'aws-amplify'
 import { createDailyTest } from '../../../graphql/mutations'
 import { PokemonQuestionDifficulty } from '../../../graphql/API'
-import { env } from '$amplify/env/generate-daily-puzzle' // replace with your function name
+import { env } from '$amplify/env/generate-daily-puzzle'
 
 Amplify.configure(
   {
