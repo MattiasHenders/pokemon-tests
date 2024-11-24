@@ -24,13 +24,9 @@ export default ({
 }) => {
   const { setPokemonQuestions, setCurrentQuestion } = useQuestionStore()
   const { setGameType } = useGameTypeStore()
-  const { clearInput, selectedPokemon, setSelectedPokemon } = useInputStore()
+  const { clearInput, setSelectedPokemon } = useInputStore()
   const { setInvalidGuess, setIsEqualPokemon, setDisplayAnswer } =
     useAnswerStore()
-
-  useEffect(() => {
-    console.log(selectedPokemon)
-  }, [selectedPokemon])
 
   useEffect(() => {
     setGameType(gameType)
