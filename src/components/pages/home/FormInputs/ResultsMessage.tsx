@@ -1,5 +1,4 @@
 import { Typography, Box } from '@mui/material'
-import { useInputStore } from '@/src/stores/input'
 import { useQuestionStore } from '@/src/stores/question'
 import { useAnswerStore } from '@/src/stores/answer'
 import { palette } from '@/styles/palette'
@@ -13,7 +12,6 @@ export default () => {
   }
 
   const getResultsText = () => {
-    if (!displayAnswer) return undefined
     if (invalidGuess) {
       return 'You guessed an invalid pokemon'
     }
@@ -42,7 +40,7 @@ export default () => {
 
   return (
     <>
-      {getResultsText() && (
+      {displayAnswer && (
         <Box
           sx={{
             mt: 1,
