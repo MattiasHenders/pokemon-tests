@@ -36,6 +36,7 @@ export default [
     id: uuidv4(),
     title: 'Styling for Daily vs Unlimited',
     content: `Different styling for daily vs unlimited game modes.`,
+    dateCompleted: new Date('2024-11-23'),
   },
   {
     id: uuidv4(),
