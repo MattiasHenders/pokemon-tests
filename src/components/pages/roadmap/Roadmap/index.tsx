@@ -9,13 +9,13 @@ import { palette } from '@/styles/palette'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 const Roadmap: FC = () => {
-  const [expandedId, setExpandedId] = useState<number>(
-    roadmap.find((item) => !item.dateCompleted)?.id || 0
+  const [expandedId, setExpandedId] = useState<string>(
+    roadmap.find((item) => !item.dateCompleted)?.id ?? ''
   )
 
   const handleChange =
-    (panel: number) => (_: React.SyntheticEvent, newExpanded: boolean) => {
-      setExpandedId(newExpanded ? panel : 0)
+    (panel: string) => (_: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpandedId(newExpanded ? panel : '')
     }
 
   return (

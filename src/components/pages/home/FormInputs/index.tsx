@@ -65,8 +65,14 @@ export default () => {
   const handleClick = async () => {
     // First check if the answer is already displayed
     if (displayAnswer) {
-      if (currentQuestion.difficulty === 'impossible') {
-        if (invalidGuess && isEqualPokemon && gameType === GameType.UNLIMITED) {
+      // Check if we will not be going to the next question
+      if (
+        invalidGuess ||
+        isEqualPokemon ||
+        currentQuestion?.difficulty === 'impossible'
+      ) {
+        // Check if we should reset the game or offer unlimited game mode
+        if (gameType === GameType.UNLIMITED) {
           window.location.reload()
         } else {
           router.push('/unlimited')
