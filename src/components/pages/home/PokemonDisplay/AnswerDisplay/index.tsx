@@ -32,7 +32,7 @@ export default () => {
       const { url: guessURL } = Sprites.getPokemon(
         currentQuestion.pokemonToGuess ?? 'Missingno.',
         {
-          gen: 'gen5',
+          gen: 'gen3',
         }
       )
 
@@ -40,66 +40,60 @@ export default () => {
       setCurrentSprite(undefined) // Temporarily clear the sprite
       setAnimationState(AnimationState.WAITING) // Set to WAITING state initially
       setZoomIn(false)
+      setCurrentSprite(guessURL)
+      setAnimationState(AnimationState.PLAYING) // Start the animation
 
-      // Delay to retrigger animations smoothly
+      // Start zoom-in after Pokéball animation
       setTimeout(() => {
-        setCurrentSprite(guessURL)
-        setAnimationState(AnimationState.PLAYING) // Start the animation
-
-        // Start zoom-in after Pokéball animation
-        setTimeout(() => {
-          setZoomIn(true)
-        }, 250) // Pokéball animation duration
-      }, 50) // Small delay to ensure state updates
+        setZoomIn(true)
+      }, 250) // Pokéball animation duration
     } else {
       setCurrentSprite(undefined)
     }
   }, [displayAnswer])
 
   useEffect(() => {
-    if (currentQuestion?.difficulty) {
-      switch (currentQuestion.difficulty) {
-        case 'easy':
-          setCurrentPokeball(BallType.Poke)
-          break
-        case 'medium':
-          setCurrentPokeball(BallType.Great)
-          break
-        case 'hard':
-          setCurrentPokeball(BallType.Ultra)
-          break
-        case 'impossible':
-          setCurrentPokeball(BallType.Master)
-          break
-        default:
-          setCurrentPokeball(BallType.Poke) // Default ball type
-      }
-
-      // Reset animations when difficulty changes
-      setCurrentSprite(undefined)
-      setAnimationState(AnimationState.WAITING) // Set to WAITING state initially
-      setZoomIn(false)
-
-      // Delay to reset animations smoothly
-      setTimeout(() => {
-        if (displayAnswer) {
-          const { url: guessURL } = Sprites.getPokemon(
-            currentQuestion.pokemonToGuess ?? 'Missingno.',
-            {
-              gen: 'gen5',
-            }
-          )
-          setCurrentSprite(guessURL)
-          setAnimationState(AnimationState.PLAYING) // Start the animation
-
-          // Start zoom-in after Pokéball animation
-          setTimeout(() => {
-            setZoomIn(true)
-          }, 250)
-        }
-      }, 50) // Small delay to ensure state updates
+    switch (currentQuestion?.difficulty) {
+      case 'easy':
+        setCurrentPokeball(BallType.Poke)
+        break
+      case 'medium':
+        setCurrentPokeball(BallType.Great)
+        break
+      case 'hard':
+        setCurrentPokeball(BallType.Ultra)
+        break
+      case 'impossible':
+        setCurrentPokeball(BallType.Master)
+        break
+      default:
+        setCurrentPokeball(BallType.Poke) // Default ball type
     }
-  }, [currentQuestion?.difficulty, displayAnswer])
+  }, [currentQuestion?.difficulty])
+
+  useEffect(() => {
+    // Reset animations when difficulty changes
+    setCurrentSprite(undefined)
+    setAnimationState(AnimationState.WAITING) // Set to WAITING state initially
+    setZoomIn(false)
+
+    // Delay to reset animations
+    if (displayAnswer) {
+      const { url: guessURL } = Sprites.getPokemon(
+        currentQuestion?.pokemonToGuess ?? 'Missingno.',
+        {
+          gen: 'gen3',
+        }
+      )
+      setCurrentSprite(guessURL)
+      setAnimationState(AnimationState.PLAYING) // Start the animation
+
+      // Start zoom-in after Pokéball animation
+      setTimeout(() => {
+        setZoomIn(true)
+      }, 250)
+    }
+  }, [currentQuestion, displayAnswer])
 
   const getImageSize = () => {
     if (matchMobileView) {

@@ -14,7 +14,7 @@ export default () => {
   const { breakpoints } = useTheme()
   const matchMobileView = useMediaQuery(breakpoints.down('sm'))
   const matchTabletView = useMediaQuery(breakpoints.down('md'))
-  const { selectedPokemon } = useInputStore()
+  const { selectedPokemon, setSelectedPokemon } = useInputStore()
   const { currentQuestion } = useQuestionStore()
   const [currentSprite, setCurrentSprite] = useState<string | undefined>(
     undefined
@@ -29,69 +29,69 @@ export default () => {
 
   useEffect(() => {
     if (selectedPokemon) {
-      const { url: guessURL } = Sprites.getPokemon(selectedPokemon.name, {
-        gen: 'gen5',
-      })
+      const { url: guessURL } = Sprites.getPokemon(
+        selectedPokemon.name ?? 'Missingno.',
+        {
+          gen: 'gen3',
+        }
+      )
 
       // Reset animations and play again
       setCurrentSprite(undefined) // Temporarily clear the sprite
       setAnimationState(AnimationState.WAITING) // Set to WAITING state initially
       setZoomIn(false)
+      setCurrentSprite(guessURL)
+      setAnimationState(AnimationState.PLAYING) // Start the animation
 
-      // Delay to retrigger animations smoothly
+      // Start zoom-in after Pokéball animation
       setTimeout(() => {
-        setCurrentSprite(guessURL)
-        setAnimationState(AnimationState.PLAYING) // Start the animation
-
-        // Start zoom-in after Pokéball animation
-        setTimeout(() => {
-          setZoomIn(true)
-        }, 250) // Pokéball animation duration
-      }, 50) // Small delay to ensure state updates
+        setZoomIn(true)
+      }, 250) // Pokéball animation duration
     } else {
       setCurrentSprite(undefined)
     }
   }, [selectedPokemon])
 
   useEffect(() => {
-    if (currentQuestion?.difficulty) {
-      switch (currentQuestion.difficulty) {
-        case 'easy':
-          setCurrentPokeball(BallType.Poke)
-          break
-        case 'medium':
-          setCurrentPokeball(BallType.Great)
-          break
-        case 'hard':
-          setCurrentPokeball(BallType.Ultra)
-          break
-        case 'impossible':
-          setCurrentPokeball(BallType.Master)
-          break
-        default:
-          setCurrentPokeball(BallType.Poke) // Default ball type
-      }
+    switch (currentQuestion?.difficulty) {
+      case 'easy':
+        setCurrentPokeball(BallType.Poke)
+        break
+      case 'medium':
+        setCurrentPokeball(BallType.Great)
+        break
+      case 'hard':
+        setCurrentPokeball(BallType.Ultra)
+        break
+      case 'impossible':
+        setCurrentPokeball(BallType.Master)
+        break
+      default:
+        setCurrentPokeball(BallType.Poke) // Default ball type
+    }
+  }, [currentQuestion?.difficulty])
 
-      // Reset animations when difficulty changes
-      setCurrentSprite(undefined)
-      setAnimationState(AnimationState.WAITING) // Set to WAITING state initially
-      setZoomIn(false)
+  useEffect(() => {
+    // Reset animations when difficulty changes
+    setCurrentSprite(undefined)
+    setAnimationState(AnimationState.WAITING) // Set to WAITING state initially
+    setZoomIn(false)
 
-      // Delay to reset animations smoothly
-      setTimeout(() => {
-        if (selectedPokemon) {
-          const { url: guessURL } = Sprites.getPokemon(selectedPokemon.name, {
-            gen: 'gen5',
-          })
-          setCurrentSprite(guessURL)
-          setAnimationState(AnimationState.PLAYING) // Start the animation
-
-          // Start zoom-in after Pokéball animation
-          setTimeout(() => {
-            setZoomIn(true)
-          }, 250)
+    // Delay to reset animations
+    if (selectedPokemon) {
+      const { url: guessURL } = Sprites.getPokemon(
+        selectedPokemon.name ?? 'Missingno.',
+        {
+          gen: 'gen3',
         }
-      }, 50) // Small delay to ensure state updates
+      )
+      setCurrentSprite(guessURL)
+      setAnimationState(AnimationState.PLAYING) // Start the animation
+
+      // Start zoom-in after Pokéball animation
+      setTimeout(() => {
+        setZoomIn(true)
+      }, 250)
     }
   }, [currentQuestion?.difficulty, selectedPokemon])
 

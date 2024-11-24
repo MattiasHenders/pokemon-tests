@@ -6,8 +6,9 @@ import { generateClient } from 'aws-amplify/api'
 import { Amplify } from 'aws-amplify'
 import outputs from '@/amplify_outputs.json'
 import { useInputStore } from '@/src/stores/input'
-import { Dex, Species } from '@pkmn/dex'
+import { Dex } from '@pkmn/dex'
 import { useAnswerStore } from '@/src/stores/answer'
+import { Nullable } from '@aws-amplify/data-schema'
 
 Amplify.configure(outputs)
 const client = generateClient<Schema>()
@@ -21,126 +22,121 @@ export default ({
   gameType: GameType
   children: React.ReactNode
 }) => {
-  const { currentQuestion, setPokemonQuestions, setCurrentQuestion } =
-    useQuestionStore()
+  const { setPokemonQuestions, setCurrentQuestion } = useQuestionStore()
   const { setGameType } = useGameTypeStore()
-  const { clearInput, setSelectedPokemon } = useInputStore()
+  const { clearInput, selectedPokemon, setSelectedPokemon } = useInputStore()
   const { setInvalidGuess, setIsEqualPokemon, setDisplayAnswer } =
     useAnswerStore()
 
   useEffect(() => {
+    console.log(selectedPokemon)
+  }, [selectedPokemon])
+
+  useEffect(() => {
     setGameType(gameType)
+    setPokemonQuestions(pokemonQuestions)
+    beginGameLogic()
   }, [])
 
-  useEffect(() => {
-    clearInput()
-    setSelectedPokemon(null)
-    setDisplayAnswer(false)
-    setIsEqualPokemon(null)
-  }, [gameType])
-
-  useEffect(() => {
-    setPokemonQuestions(pokemonQuestions)
-    if (pokemonQuestions?.easyQuestion)
-      setCurrentQuestion(pokemonQuestions?.easyQuestion)
-  }, [pokemonQuestions, setCurrentQuestion])
-
-  useEffect(() => {
-    const getData = async () => {
-      if (gameType === GameType.DAILY_PUZZLE) {
-        const { data, errors } = await client.models.UserTests.list({
-          filter: {
-            testId: {
-              eq: pokemonQuestions?.id as string,
-            },
+  const beginGameLogic = async () => {
+    // Check what game mode we are in
+    if (gameType === GameType.DAILY_PUZZLE) {
+      const { data, errors } = await client.models.UserTests.list({
+        filter: {
+          testId: {
+            eq: pokemonQuestions?.id as string,
           },
-        })
+        },
+      })
 
-        const userTest = data[0]
+      // If its a daily test, see if the user has played today
+      const userTest = data[0]
 
-        switch (currentQuestion?.difficulty) {
-          case 'easy':
-            if (userTest?.easyAnswer) {
-              console.log(userTest?.easyAnswer)
-              setSelectedPokemon(Dex.species.get(userTest?.easyAnswer))
-              setDisplayAnswer(true)
-              if (
-                !currentQuestion.validPokemon?.includes(userTest?.easyAnswer)
-              ) {
-                console.log('invalid guess', currentQuestion.validPokemon)
-                setInvalidGuess(true)
-                break
-              }
-              if (userTest?.easyAnswer === currentQuestion.pokemonToGuess) {
-                console.log('equal pokemon', currentQuestion.validPokemon)
-                setIsEqualPokemon(true)
-              } else {
-                console.log('not equal pokemon', currentQuestion.validPokemon)
-                setIsEqualPokemon(false)
-              }
-            }
-            break
-          case 'medium':
-            if (userTest?.mediumAnswer) {
-              setSelectedPokemon(Dex.species.get(userTest?.mediumAnswer))
-              setDisplayAnswer(true)
-              if (
-                !currentQuestion.validPokemon?.includes(userTest?.mediumAnswer)
-              ) {
-                setInvalidGuess(true)
-                break
-              }
-              if (userTest?.mediumAnswer === currentQuestion.pokemonToGuess) {
-                setIsEqualPokemon(true)
-              } else {
-                setIsEqualPokemon(false)
-              }
-            }
-            break
-          case 'hard':
-            if (userTest?.hardAnswer) {
-              setSelectedPokemon(Dex.species.get(userTest?.hardAnswer))
-              setDisplayAnswer(true)
-              if (
-                !currentQuestion.validPokemon?.includes(userTest?.hardAnswer)
-              ) {
-                setInvalidGuess(true)
-                break
-              }
-              if (userTest?.hardAnswer === currentQuestion.pokemonToGuess) {
-                setIsEqualPokemon(true)
-              } else {
-                setIsEqualPokemon(false)
-              }
-            }
-            break
-          case 'impossible':
-            if (userTest?.impossibleAnswer) {
-              setSelectedPokemon(Dex.species.get(userTest?.impossibleAnswer))
-              setDisplayAnswer(true)
-              if (
-                !currentQuestion.validPokemon?.includes(
-                  userTest?.impossibleAnswer
-                )
-              ) {
-                setInvalidGuess(true)
-                break
-              }
-              if (
-                userTest?.impossibleAnswer === currentQuestion.pokemonToGuess
-              ) {
-                setIsEqualPokemon(true)
-              } else {
-                setIsEqualPokemon(false)
-              }
-            }
-            break
-        }
+      // If the user has not played today, reset the game
+      if (!userTest || errors) {
+        if (pokemonQuestions?.easyQuestion)
+          setCurrentQuestion(pokemonQuestions?.easyQuestion)
+        clearInput()
+        setSelectedPokemon(null)
+        setDisplayAnswer(false)
+        setIsEqualPokemon(null)
+        return
+      }
+
+      // The user has played today, set the game to the furthest question they answered
+      const currentQuestionDifficulty = getFurthestQuestionDifficulty(userTest)
+      switch (currentQuestionDifficulty) {
+        case 'easy':
+          if (pokemonQuestions?.easyQuestion)
+            setGameToPreviousLevel(
+              userTest.easyAnswer,
+              pokemonQuestions.easyQuestion
+            )
+          break
+        case 'medium':
+          if (pokemonQuestions?.mediumQuestion)
+            setGameToPreviousLevel(
+              userTest.mediumAnswer,
+              pokemonQuestions.mediumQuestion
+            )
+          break
+        case 'hard':
+          if (pokemonQuestions?.hardQuestion)
+            setGameToPreviousLevel(
+              userTest.hardAnswer,
+              pokemonQuestions.hardQuestion
+            )
+          break
+        case 'impossible':
+          if (pokemonQuestions?.impossibleQuestion)
+            setGameToPreviousLevel(
+              userTest.impossibleAnswer,
+              pokemonQuestions.impossibleQuestion
+            )
+          break
       }
     }
+    // If the game type is unlimited, set it to the easy question
+    else {
+      clearInput()
+      if (pokemonQuestions?.easyQuestion) {
+        setCurrentQuestion(pokemonQuestions?.easyQuestion)
+      }
+      setSelectedPokemon(null)
+      setDisplayAnswer(false)
+      setIsEqualPokemon(null)
+    }
+  }
 
-    getData()
-  }, [currentQuestion])
+  const setGameToPreviousLevel = (
+    usersAnswer: Nullable<string>,
+    question: Schema['PokemonQuestion']['type']
+  ) => {
+    setCurrentQuestion(question)
+    if (usersAnswer) {
+      setSelectedPokemon(Dex.species.get(usersAnswer))
+      setDisplayAnswer(true)
+      if (!question?.validPokemon?.includes(usersAnswer)) {
+        setInvalidGuess(true)
+        return
+      }
+      if (usersAnswer === question.pokemonToGuess) {
+        setIsEqualPokemon(true)
+      } else {
+        setIsEqualPokemon(false)
+      }
+    }
+  }
+
+  const getFurthestQuestionDifficulty = (
+    userTest: Schema['UserTests']['type']
+  ) => {
+    if (userTest.impossibleAnswer) return 'impossible'
+    if (userTest.hardAnswer) return 'hard'
+    if (userTest.mediumAnswer) return 'medium'
+    if (userTest.easyAnswer) return 'easy'
+    else return 'error'
+  }
 
   return children
 }

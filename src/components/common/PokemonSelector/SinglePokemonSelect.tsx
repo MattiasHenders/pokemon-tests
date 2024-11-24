@@ -10,7 +10,7 @@ type SinglePokemonSelectProps = {
 
 const SinglePokemonSelect = ({ pokemon }: SinglePokemonSelectProps) => {
   const { url } = Sprites.getPokemon(pokemon.name, {
-    gen: 'gen5',
+    gen: 'gen3',
   })
 
   return (

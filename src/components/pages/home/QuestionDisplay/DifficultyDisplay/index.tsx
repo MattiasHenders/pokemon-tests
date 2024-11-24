@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Box, Typography } from '@mui/material'
 import { palette } from '@/styles/palette'
@@ -6,36 +6,33 @@ import { useQuestionStore } from '@/src/stores/question'
 
 export default () => {
   const { currentQuestion } = useQuestionStore()
+  const [questionDifficulty, setQuestionDifficulty] = useState('Loading')
+  const [questionIcon, setQuestionIcon] = useState('/img/balls/premier.webp')
 
-  const formatQuestionDifficulty = () => {
+  useEffect(() => {
     switch (currentQuestion?.difficulty) {
       case 'easy':
-        return 'Easy'
+        setQuestionDifficulty('Easy')
+        setQuestionIcon('/img/balls/poke.webp')
+        break
       case 'medium':
-        return 'Medium'
+        setQuestionDifficulty('Medium')
+        setQuestionIcon('/img/balls/great.webp')
+        break
       case 'hard':
-        return 'Hard'
+        setQuestionDifficulty('Hard')
+        setQuestionIcon('/img/balls/ultra.webp')
+        break
       case 'impossible':
-        return 'Impossible'
+        setQuestionDifficulty('Impossible')
+        setQuestionIcon('/img/balls/master.webp')
+        break
       default:
-        return 'Loading'
+        setQuestionDifficulty('Loading')
+        setQuestionIcon('/img/balls/premier.webp')
+        break
     }
-  }
-
-  const getQuestionIcon = () => {
-    switch (currentQuestion?.difficulty) {
-      case 'easy':
-        return '/img/balls/poke.webp'
-      case 'medium':
-        return '/img/balls/great.webp'
-      case 'hard':
-        return '/img/balls/ultra.webp'
-      case 'impossible':
-        return '/img/balls/master.webp'
-      default:
-        return '/img/balls/premier.webp'
-    }
-  }
+  }, [currentQuestion?.difficulty])
 
   return (
     <Box
@@ -55,14 +52,9 @@ export default () => {
           color: palette.poke.yellow,
         }}
       >
-        {formatQuestionDifficulty()} Level
+        {questionDifficulty} Level
       </Typography>
-      <Image
-        src={getQuestionIcon() || ''}
-        width={50}
-        height={50}
-        alt={'question'}
-      />
+      <Image src={questionIcon} width={50} height={50} alt={'question'} />
     </Box>
   )
 }
