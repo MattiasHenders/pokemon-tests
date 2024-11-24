@@ -1,5 +1,6 @@
+import { palette } from '@/styles/palette'
 import { useAuthenticator } from '@aws-amplify/ui-react'
-import { Avatar, Box } from '@mui/material'
+import { Avatar, Box, Typography } from '@mui/material'
 import {
   fetchUserAttributes,
   FetchUserAttributesOutput,
@@ -52,14 +53,27 @@ export default () => {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: 'column',
         width: '100%',
-        m: 3,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Avatar
         {...stringAvatar(userAttributes?.email ?? user.username)}
         sx={{ width: 72, height: 72 }}
       />
+      <Typography
+        variant="body1"
+        sx={{
+          color: palette.primary.lightText,
+          fontSize: 16,
+          mt: 1,
+        }}
+      >
+        {userAttributes?.email?.slice(0, 6) + `...`}
+      </Typography>
     </Box>
   )
 }

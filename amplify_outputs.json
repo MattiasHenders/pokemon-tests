@@ -121,8 +121,7 @@
                     "allow": "public",
                     "provider": "iam",
                     "operations": [
-                      "read",
-                      "create"
+                      "read"
                     ]
                   },
                   {
@@ -263,7 +262,7 @@
             "userId": {
               "name": "userId",
               "isArray": false,
-              "type": "String",
+              "type": "ID",
               "isRequired": false,
               "attributes": []
             },
@@ -305,14 +304,6 @@
             {
               "type": "model",
               "properties": {}
-            },
-            {
-              "type": "key",
-              "properties": {
-                "fields": [
-                  "id"
-                ]
-              }
             },
             {
               "type": "auth",

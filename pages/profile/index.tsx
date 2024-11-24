@@ -18,7 +18,6 @@ const ProfilePage: NextPage = () => {
       >
         <ProfileHeader />
         <ProfileHero />
-        <Typography variant="h4">Profile</Typography>
       </Container>
     </Authenticator>
   )

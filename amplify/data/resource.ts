@@ -41,9 +41,8 @@ const schema = a
 
     UserStats: a
       .model({
-        id: a.id(),
-        userId: a.string(),
-        points: a.integer(),
+        userId: a.id(),
+        points: a.integer().default(0),
         pokemonCaught: a.string().array(),
       })
       .authorization((allow) => [
