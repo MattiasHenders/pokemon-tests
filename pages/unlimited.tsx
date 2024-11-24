@@ -11,6 +11,7 @@ import type { Schema } from '@/amplify/data/resource'
 import { getValidPokemonQuestions } from '@/services/getPokemonQuestion'
 import { GameType } from '@/src/stores/game'
 import GameManager from '@/src/components/common/GameManager'
+import GameTypeDisplay from '@/src/components/pages/home/GameTypeDisplay'
 
 interface UnlimitedPageProps {
   pokemonQuestions: Schema['DailyTest']['type']
@@ -32,6 +33,7 @@ const UnlimitedPage: NextPage<UnlimitedPageProps> = ({ pokemonQuestions }) => {
         }}
       >
         <HomeHero />
+        <GameTypeDisplay />
         <Box sx={{ display: 'flex' }}>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <GuessDisplay />

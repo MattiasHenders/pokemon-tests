@@ -14,6 +14,7 @@ import {
 } from '@/utils/amplifyServerUtils'
 import { GameType } from '@/src/stores/game'
 import GameManager from '@/src/components/common/GameManager'
+import GameTypeDisplay from '@/src/components/pages/home/GameTypeDisplay'
 
 interface HomePageProps {
   pokemonQuestions: Schema['DailyTest']['type']
@@ -35,6 +36,7 @@ const HomePage: NextPage<HomePageProps> = ({ pokemonQuestions }) => {
         }}
       >
         <HomeHero />
+        <GameTypeDisplay />
         <Box sx={{ display: 'flex' }}>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <GuessDisplay />
