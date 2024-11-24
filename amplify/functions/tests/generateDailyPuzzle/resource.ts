@@ -6,4 +6,5 @@ export const generateDailyPuzzle = defineFunction({
   // optionally specify a path to your handler (defaults to "./handler.ts")
   entry: './handler.ts',
   schedule: 'every day',
+  timeoutSeconds: 15,
 })

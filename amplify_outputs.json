@@ -121,7 +121,8 @@
                     "allow": "public",
                     "provider": "iam",
                     "operations": [
-                      "read"
+                      "read",
+                      "create"
                     ]
                   },
                   {
