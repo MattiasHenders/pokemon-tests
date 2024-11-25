@@ -71,7 +71,6 @@ export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -160,17 +159,24 @@ export const listUserAcheivements = /* GraphQL */ `query ListUserAcheivements(
 >;
 export const listUserStats = /* GraphQL */ `query ListUserStats(
   $filter: ModelUserStatsFilterInput
+  $id: ID
   $limit: Int
   $nextToken: String
+  $sortDirection: ModelSortDirection
 ) {
-  listUserStats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUserStats(
+    filter: $filter
+    id: $id
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
     items {
       createdAt
       id
       points
       pokemonCaught
       updatedAt
-      userId
       __typename
     }
     nextToken

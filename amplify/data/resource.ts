@@ -1,5 +1,7 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend'
 import { generateDailyPuzzle } from '../functions/tests/generateDailyPuzzle/resource'
+import { postConfirmation } from '../auth/postConfirmation/resource'
+import { streamTestUpdates } from '../functions/tests/streamTestUpdates/resource'
 
 const schema = a
   .schema({
@@ -42,12 +44,12 @@ const schema = a
 
     UserStats: a
       .model({
-        userId: a.id(),
+        id: a.id(),
         points: a.integer().default(0),
         pokemonCaught: a.string().array(),
       })
       .authorization((allow) => [
-        allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
+        allow.ownerDefinedIn('id').to(['create', 'read', 'update']),
       ]),
 
     UserAcheivements: a
@@ -63,7 +65,9 @@ const schema = a
       ]),
   })
   .authorization((allow) => [
+    allow.resource(postConfirmation).to(['mutate']),
     allow.resource(generateDailyPuzzle).to(['mutate']),
+    allow.resource(streamTestUpdates).to(['query', 'mutate']),
   ])
 
 export type Schema = ClientSchema<typeof schema>

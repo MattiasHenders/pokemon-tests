@@ -48,7 +48,6 @@ export type UserStats = {
   points?: number | null,
   pokemonCaught?: Array< string | null > | null,
   updatedAt: string,
-  userId?: string | null,
 };
 
 export type UserTests = {
@@ -170,7 +169,6 @@ export type ModelUserStatsFilterInput = {
   points?: ModelIntInput | null,
   pokemonCaught?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
 };
 
 export type ModelIntInput = {
@@ -259,19 +257,18 @@ export type CreateUserAcheivementsInput = {
 export type ModelUserStatsConditionInput = {
   and?: Array< ModelUserStatsConditionInput | null > | null,
   createdAt?: ModelStringInput | null,
+  id?: ModelStringInput | null,
   not?: ModelUserStatsConditionInput | null,
   or?: Array< ModelUserStatsConditionInput | null > | null,
   points?: ModelIntInput | null,
   pokemonCaught?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
 };
 
 export type CreateUserStatsInput = {
   id?: string | null,
   points?: number | null,
   pokemonCaught?: Array< string | null > | null,
-  userId?: string | null,
 };
 
 export type ModelUserTestsConditionInput = {
@@ -336,7 +333,6 @@ export type UpdateUserStatsInput = {
   id: string,
   points?: number | null,
   pokemonCaught?: Array< string | null > | null,
-  userId?: string | null,
 };
 
 export type UpdateUserTestsInput = {
@@ -403,12 +399,11 @@ export type ModelSubscriptionUserAcheivementsFilterInput = {
 export type ModelSubscriptionUserStatsFilterInput = {
   and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
   createdAt?: ModelSubscriptionStringInput | null,
-  id?: ModelSubscriptionIDInput | null,
+  id?: ModelStringInput | null,
   or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
   points?: ModelSubscriptionIntInput | null,
   pokemonCaught?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  userId?: ModelStringInput | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -508,7 +503,6 @@ export type GetUserStatsQuery = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -580,8 +574,10 @@ export type ListUserAcheivementsQuery = {
 
 export type ListUserStatsQueryVariables = {
   filter?: ModelUserStatsFilterInput | null,
+  id?: string | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListUserStatsQuery = {
@@ -594,7 +590,6 @@ export type ListUserStatsQuery = {
       points?: number | null,
       pokemonCaught?: Array< string | null > | null,
       updatedAt: string,
-      userId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -701,7 +696,6 @@ export type CreateUserStatsMutation = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -799,7 +793,6 @@ export type DeleteUserStatsMutation = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -897,7 +890,6 @@ export type UpdateUserStatsMutation = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -983,7 +975,7 @@ export type OnCreateUserAcheivementsSubscription = {
 
 export type OnCreateUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
-  userId?: string | null,
+  id?: string | null,
 };
 
 export type OnCreateUserStatsSubscription = {
@@ -994,7 +986,6 @@ export type OnCreateUserStatsSubscription = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -1080,7 +1071,7 @@ export type OnDeleteUserAcheivementsSubscription = {
 
 export type OnDeleteUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
-  userId?: string | null,
+  id?: string | null,
 };
 
 export type OnDeleteUserStatsSubscription = {
@@ -1091,7 +1082,6 @@ export type OnDeleteUserStatsSubscription = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -1177,7 +1167,7 @@ export type OnUpdateUserAcheivementsSubscription = {
 
 export type OnUpdateUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
-  userId?: string | null,
+  id?: string | null,
 };
 
 export type OnUpdateUserStatsSubscription = {
@@ -1188,7 +1178,6 @@ export type OnUpdateUserStatsSubscription = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 

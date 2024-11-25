@@ -12,10 +12,10 @@ const backend = defineBackend({
   ...functions,
 })
 
-const userStatsTable = backend.data.resources.tables['UserStats']
+const userTestsTable = backend.data.resources.tables['UserTests']
 
 const policy = new Policy(
-  Stack.of(userStatsTable),
+  Stack.of(userTestsTable),
   'MyDynamoDBFunctionStreamingPolicy',
   {
     statements: [
@@ -32,14 +32,15 @@ const policy = new Policy(
     ],
   }
 )
+
 backend.streamTestUpdates.resources.lambda.role?.attachInlinePolicy(policy)
 
 const mapping = new EventSourceMapping(
-  Stack.of(userStatsTable),
+  Stack.of(userTestsTable),
   'MyDynamoDBFunctionTodoEventStreamMapping',
   {
     target: backend.streamTestUpdates.resources.lambda,
-    eventSourceArn: userStatsTable.tableStreamArn,
+    eventSourceArn: userTestsTable.tableStreamArn,
     startingPosition: StartingPosition.LATEST,
   }
 )

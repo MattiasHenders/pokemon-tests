@@ -2,7 +2,7 @@ import type { PostConfirmationTriggerHandler } from 'aws-lambda'
 import { type Schema } from '../../data/resource'
 import { Amplify } from 'aws-amplify'
 import { generateClient } from 'aws-amplify/data'
-import { env } from '$amplify/env/generate-daily-puzzle'
+import { env } from '$amplify/env/post-confirmation'
 import { createUserStats } from '../../graphql/mutations'
 
 Amplify.configure(
@@ -11,7 +11,7 @@ Amplify.configure(
       GraphQL: {
         endpoint: env.AMPLIFY_DATA_GRAPHQL_ENDPOINT,
         region: env.AWS_REGION,
-        defaultAuthMode: 'iam',
+        defaultAuthMode: 'identityPool',
       },
     },
   },
@@ -33,16 +33,15 @@ Amplify.configure(
   }
 )
 
-const client = generateClient<Schema>({
-  authMode: 'iam',
-})
+const client = generateClient<Schema>()
 
 export const handler: PostConfirmationTriggerHandler = async (event) => {
+  console.log(event)
   await client.graphql({
     query: createUserStats,
     variables: {
       input: {
-        userId: event.userName,
+        id: event.userName,
         points: 0,
         pokemonCaught: [],
       },

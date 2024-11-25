@@ -6,12 +6,36 @@ import {
   FetchUserAttributesOutput,
 } from 'aws-amplify/auth'
 import { useEffect, useState } from 'react'
+import { Schema } from '@/amplify/data/resource'
+import { Amplify } from 'aws-amplify'
+import outputs from '@/amplify_outputs.json'
+import { generateClient } from 'aws-amplify/api'
+
+Amplify.configure(outputs)
+const client = generateClient<Schema>()
 
 export default () => {
   const { user } = useAuthenticator()
   const [userAttributes, setUserAttributes] = useState<
     FetchUserAttributesOutput | undefined
   >(undefined)
+  const [userStats, setUserStats] = useState<
+    Schema['UserStats']['type'] | undefined
+  >(undefined)
+
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      const { data: userStats, errors } = await client.models.UserStats.get({
+        id: user.userId,
+      })
+
+      if (!errors) {
+        setUserStats(userStats as Schema['UserStats']['type'])
+      }
+    }
+
+    fetchUserStats()
+  }, [])
 
   useEffect(() => {
     const getUserAttributes = async () => {
@@ -73,6 +97,16 @@ export default () => {
         }}
       >
         {userAttributes?.email?.slice(0, 6) + `...`}
+      </Typography>
+      <Typography
+        variant="body1"
+        sx={{
+          color: palette.primary.lightText,
+          fontSize: 18,
+          mt: 1,
+        }}
+      >
+        {userStats?.points} points
       </Typography>
     </Box>
   )

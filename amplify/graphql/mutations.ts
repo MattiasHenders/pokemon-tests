@@ -80,7 +80,6 @@ export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -182,7 +181,6 @@ export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -284,7 +282,6 @@ export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }

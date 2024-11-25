@@ -9,6 +9,8 @@ import {
   alpha,
   Box,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material'
 import { generateClient } from 'aws-amplify/api'
 import { Schema } from '@/amplify/data/resource'
@@ -17,7 +19,7 @@ import outputs from '@/amplify_outputs.json'
 import { useEffect, useState } from 'react'
 import { palette } from '@/styles/palette'
 
-Amplify.configure(outputs, { ssr: true })
+Amplify.configure(outputs)
 const client = generateClient<Schema>()
 
 type Row = {
@@ -31,12 +33,11 @@ type Row = {
 }
 
 export default () => {
+  const { breakpoints } = useTheme()
+  const matchMobileView = useMediaQuery(breakpoints.down('sm'))
   const [rows, setRows] = useState<Row[]>([])
-  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setIsLoading(true)
-
     const fetchUsersTests = async () => {
       const { data: itemList, errors } = await client.models.UserTests.list({
         limit: 10,
@@ -55,24 +56,27 @@ export default () => {
 
         setRows(rows)
       }
-      setIsLoading(false)
     }
 
     fetchUsersTests()
   }, [])
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+      }}
+    >
       <Typography variant="h5" sx={{ color: palette.primary.lightText }}>
         Past Tests
       </Typography>
       <TableContainer component={Paper}>
         <Table
           sx={{
-            minWidth: 650,
             backgroundColor: alpha(palette.primary.dark, 1),
           }}
-          aria-label="simple table"
         >
           <TableHead>
             <TableRow sx={{ backgroundColor: palette.primary.main }}>
@@ -80,25 +84,37 @@ export default () => {
                 Date
               </TableCell>
               <TableCell
-                sx={{ color: palette.primary.darkText }}
+                sx={{
+                  color: palette.primary.darkText,
+                  display: matchMobileView ? 'none' : 'table-cell',
+                }}
                 align="center"
               >
                 Easy
               </TableCell>
               <TableCell
-                sx={{ color: palette.primary.darkText }}
+                sx={{
+                  color: palette.primary.darkText,
+                  display: matchMobileView ? 'none' : 'table-cell',
+                }}
                 align="center"
               >
                 Medium
               </TableCell>
               <TableCell
-                sx={{ color: palette.primary.darkText }}
+                sx={{
+                  color: palette.primary.darkText,
+                  display: matchMobileView ? 'none' : 'table-cell',
+                }}
                 align="center"
               >
                 Hard
               </TableCell>
               <TableCell
-                sx={{ color: palette.primary.darkText }}
+                sx={{
+                  color: palette.primary.darkText,
+                  display: matchMobileView ? 'none' : 'table-cell',
+                }}
                 align="center"
               >
                 Impossible
@@ -125,25 +141,37 @@ export default () => {
                   {row.date}
                 </TableCell>
                 <TableCell
-                  sx={{ color: palette.primary.lightText }}
+                  sx={{
+                    color: palette.primary.lightText,
+                    display: matchMobileView ? 'none' : 'table-cell',
+                  }}
                   align="center"
                 >
                   {row.easyAnswer}
                 </TableCell>
                 <TableCell
-                  sx={{ color: palette.primary.lightText }}
+                  sx={{
+                    color: palette.primary.lightText,
+                    display: matchMobileView ? 'none' : 'table-cell',
+                  }}
                   align="center"
                 >
                   {row.mediumAnswer}
                 </TableCell>
                 <TableCell
-                  sx={{ color: palette.primary.lightText }}
+                  sx={{
+                    color: palette.primary.lightText,
+                    display: matchMobileView ? 'none' : 'table-cell',
+                  }}
                   align="center"
                 >
                   {row.hardAnswer}
                 </TableCell>
                 <TableCell
-                  sx={{ color: palette.primary.lightText }}
+                  sx={{
+                    color: palette.primary.lightText,
+                    display: matchMobileView ? 'none' : 'table-cell',
+                  }}
                   align="center"
                 >
                   {row.impossibleAnswer}
