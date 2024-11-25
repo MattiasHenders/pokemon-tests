@@ -80,7 +80,6 @@ export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -99,6 +98,7 @@ export const createUserTests = /* GraphQL */ `mutation CreateUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -181,7 +181,6 @@ export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -200,6 +199,7 @@ export const deleteUserTests = /* GraphQL */ `mutation DeleteUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -282,7 +282,6 @@ export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -301,6 +300,7 @@ export const updateUserTests = /* GraphQL */ `mutation UpdateUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId

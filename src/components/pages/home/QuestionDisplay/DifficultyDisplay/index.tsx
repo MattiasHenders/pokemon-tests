@@ -45,10 +45,13 @@ export default () => {
     >
       <Typography
         sx={{
-          fontSize: '2rem',
+          fontSize: { xs: '1.5rem', sm: '2rem' },
           fontFamily: 'Inter, system-ui, Avenir, Helvetica, Arial, sans-serif',
           fontWeight: 'bold',
-          WebkitTextStroke: `1.5px ${palette.poke.blue}`,
+          WebkitTextStroke: {
+            xs: `1px ${palette.poke.blue}`,
+            md: `1.5px ${palette.poke.blue}`,
+          },
           color: palette.poke.yellow,
         }}
       >

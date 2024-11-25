@@ -9,6 +9,7 @@ import { useInputStore } from '@/src/stores/input'
 import { Dex } from '@pkmn/dex'
 import { useAnswerStore } from '@/src/stores/answer'
 import { Nullable } from '@aws-amplify/data-schema'
+import { getCurrentUser } from 'aws-amplify/auth'
 
 Amplify.configure(outputs)
 const client = generateClient<Schema>()
@@ -31,7 +32,25 @@ export default ({
   useEffect(() => {
     setGameType(gameType)
     setPokemonQuestions(pokemonQuestions)
-    beginGameLogic()
+
+    const startGameOnLoad = async () => {
+      try {
+        // User is signed in
+        await getCurrentUser()
+        beginGameLogic()
+      } catch (error) {
+        // User is not signed in
+        if (pokemonQuestions?.easyQuestion)
+          setCurrentQuestion(pokemonQuestions?.easyQuestion)
+        clearInput()
+        setSelectedPokemon(null)
+        setDisplayAnswer(false)
+        setIsEqualPokemon(null)
+        return
+      }
+    }
+
+    startGameOnLoad()
   }, [])
 
   const beginGameLogic = async () => {

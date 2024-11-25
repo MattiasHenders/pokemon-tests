@@ -69,15 +69,14 @@ export const onCreateUserAcheivements = /* GraphQL */ `subscription OnCreateUser
 >;
 export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats(
   $filter: ModelSubscriptionUserStatsFilterInput
-  $userId: String
+  $id: String
 ) {
-  onCreateUserStats(filter: $filter, userId: $userId) {
+  onCreateUserStats(filter: $filter, id: $id) {
     createdAt
     id
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -96,6 +95,7 @@ export const onCreateUserTests = /* GraphQL */ `subscription OnCreateUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -167,15 +167,14 @@ export const onDeleteUserAcheivements = /* GraphQL */ `subscription OnDeleteUser
 >;
 export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats(
   $filter: ModelSubscriptionUserStatsFilterInput
-  $userId: String
+  $id: String
 ) {
-  onDeleteUserStats(filter: $filter, userId: $userId) {
+  onDeleteUserStats(filter: $filter, id: $id) {
     createdAt
     id
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -194,6 +193,7 @@ export const onDeleteUserTests = /* GraphQL */ `subscription OnDeleteUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -265,15 +265,14 @@ export const onUpdateUserAcheivements = /* GraphQL */ `subscription OnUpdateUser
 >;
 export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats(
   $filter: ModelSubscriptionUserStatsFilterInput
-  $userId: String
+  $id: String
 ) {
-  onUpdateUserStats(filter: $filter, userId: $userId) {
+  onUpdateUserStats(filter: $filter, id: $id) {
     createdAt
     id
     points
     pokemonCaught
     updatedAt
-    userId
     __typename
   }
 }
@@ -292,6 +291,7 @@ export const onUpdateUserTests = /* GraphQL */ `subscription OnUpdateUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
