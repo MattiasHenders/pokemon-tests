@@ -99,6 +99,7 @@ export const createUserTests = /* GraphQL */ `mutation CreateUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -200,6 +201,7 @@ export const deleteUserTests = /* GraphQL */ `mutation DeleteUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -301,6 +303,7 @@ export const updateUserTests = /* GraphQL */ `mutation UpdateUserTests(
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId

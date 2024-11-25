@@ -109,52 +109,109 @@ export default () => {
   }
 
   const checkResult = () => {
+    const invalidGuess = !currentQuestion.validPokemon?.includes(
+      selectedPokemon?.name as string
+    )
+
+    const isEqualPokemon =
+      currentQuestion.pokemonToGuess === selectedPokemon?.name
+
     // Submit Results if the user is logged in
-    if (user && gameType === GameType.DAILY_PUZZLE) {
-      handleSubmitUserAnswer()
+    if (
+      user &&
+      gameType === GameType.DAILY_PUZZLE &&
+      currentQuestion.difficulty
+    ) {
+      handleSubmitUserAnswer(
+        isEqualPokemon,
+        invalidGuess,
+        currentQuestion.difficulty
+      )
     }
 
     setDisplayAnswer(true)
 
     // Check if the answer is invalid
-    if (
-      !currentQuestion.validPokemon?.includes(selectedPokemon?.name as string)
-    ) {
+    if (invalidGuess) {
       setInvalidGuess(true)
       return
     }
 
     // Check if the answer is equal, and therefore a fail
-    if (currentQuestion.pokemonToGuess === selectedPokemon?.name) {
+    if (isEqualPokemon) {
       setIsEqualPokemon(true)
       return
     }
   }
 
-  const handleSubmitUserAnswer = async () => {
+  const calculatePoints = (
+    isEqualPokemon: boolean,
+    invalidGuess: boolean,
+    difficulty: 'easy' | 'medium' | 'hard' | 'impossible' | 'error'
+  ): number => {
+    // Invalid guess: no points
+    if (invalidGuess)
+      return {
+        easy: 0,
+        medium: 10,
+        hard: 30,
+        impossible: 70,
+        error: 0,
+      }[difficulty]
+
+    // Equal Pokemon: small consolation points
+    if (isEqualPokemon)
+      return {
+        easy: 5,
+        medium: 20,
+        hard: 50,
+        impossible: 110,
+        error: 0,
+      }[difficulty]
+
+    // Success based on difficulty point calculation
+    return {
+      easy: 10,
+      medium: 30,
+      hard: 70,
+      impossible: 150,
+      error: 0,
+    }[difficulty]
+  }
+
+  const handleSubmitUserAnswer = async (
+    isEqualPokemon: boolean,
+    invalidGuess: boolean,
+    difficulty: 'easy' | 'medium' | 'hard' | 'impossible' | 'error'
+  ) => {
+    const points = calculatePoints(isEqualPokemon, invalidGuess, difficulty)
     switch (currentQuestion.difficulty) {
       case 'easy':
         await upsertUserTest({
           testId: pokemonQuestions?.id as string,
           easyAnswer: selectedPokemon?.name as string,
+          points,
         })
         break
       case 'medium':
         await upsertUserTest({
           testId: pokemonQuestions?.id as string,
           mediumAnswer: selectedPokemon?.name as string,
+          points,
         })
         break
       case 'hard':
         await upsertUserTest({
           testId: pokemonQuestions?.id as string,
           hardAnswer: selectedPokemon?.name as string,
+          points,
         })
         break
       case 'impossible':
         await upsertUserTest({
           testId: pokemonQuestions?.id as string,
           impossibleAnswer: selectedPokemon?.name as string,
+          points,
         })
         break
     }

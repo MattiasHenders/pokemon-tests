@@ -34,6 +34,7 @@ const schema = a
         mediumAnswer: a.string(),
         hardAnswer: a.string(),
         impossibleAnswer: a.string(),
+        points: a.integer().default(0),
       })
       .authorization((allow) => [
         allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),

@@ -59,6 +59,7 @@ export type UserTests = {
   id: string,
   impossibleAnswer?: string | null,
   mediumAnswer?: string | null,
+  points?: number | null,
   testId?: string | null,
   updatedAt: string,
   userId?: string | null,
@@ -169,7 +170,7 @@ export type ModelUserStatsFilterInput = {
   points?: ModelIntInput | null,
   pokemonCaught?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userId?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
 };
 
 export type ModelIntInput = {
@@ -200,6 +201,7 @@ export type ModelUserTestsFilterInput = {
   mediumAnswer?: ModelStringInput | null,
   not?: ModelUserTestsFilterInput | null,
   or?: Array< ModelUserTestsFilterInput | null > | null,
+  points?: ModelIntInput | null,
   testId?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   userId?: ModelStringInput | null,
@@ -262,7 +264,7 @@ export type ModelUserStatsConditionInput = {
   points?: ModelIntInput | null,
   pokemonCaught?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userId?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
 };
 
 export type CreateUserStatsInput = {
@@ -281,6 +283,7 @@ export type ModelUserTestsConditionInput = {
   mediumAnswer?: ModelStringInput | null,
   not?: ModelUserTestsConditionInput | null,
   or?: Array< ModelUserTestsConditionInput | null > | null,
+  points?: ModelIntInput | null,
   testId?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   userId?: ModelStringInput | null,
@@ -292,6 +295,7 @@ export type CreateUserTestsInput = {
   id?: string | null,
   impossibleAnswer?: string | null,
   mediumAnswer?: string | null,
+  points?: number | null,
   testId?: string | null,
   userId?: string | null,
 };
@@ -341,6 +345,7 @@ export type UpdateUserTestsInput = {
   id: string,
   impossibleAnswer?: string | null,
   mediumAnswer?: string | null,
+  points?: number | null,
   testId?: string | null,
   userId?: string | null,
 };
@@ -427,6 +432,7 @@ export type ModelSubscriptionUserTestsFilterInput = {
   impossibleAnswer?: ModelSubscriptionStringInput | null,
   mediumAnswer?: ModelSubscriptionStringInput | null,
   or?: Array< ModelSubscriptionUserTestsFilterInput | null > | null,
+  points?: ModelSubscriptionIntInput | null,
   testId?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   userId?: ModelStringInput | null,
@@ -519,6 +525,7 @@ export type GetUserTestsQuery = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -573,10 +580,8 @@ export type ListUserAcheivementsQuery = {
 
 export type ListUserStatsQueryVariables = {
   filter?: ModelUserStatsFilterInput | null,
-  id?: string | null,
   limit?: number | null,
   nextToken?: string | null,
-  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListUserStatsQuery = {
@@ -614,6 +619,7 @@ export type ListUserTestsQuery = {
       id: string,
       impossibleAnswer?: string | null,
       mediumAnswer?: string | null,
+      points?: number | null,
       testId?: string | null,
       updatedAt: string,
       userId?: string | null,
@@ -713,6 +719,7 @@ export type CreateUserTestsMutation = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -810,6 +817,7 @@ export type DeleteUserTestsMutation = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -907,6 +915,7 @@ export type UpdateUserTestsMutation = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -1003,6 +1012,7 @@ export type OnCreateUserTestsSubscription = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -1099,6 +1109,7 @@ export type OnDeleteUserTestsSubscription = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -1195,6 +1206,7 @@ export type OnUpdateUserTestsSubscription = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,

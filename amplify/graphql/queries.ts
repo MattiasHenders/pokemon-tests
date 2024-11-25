@@ -87,6 +87,7 @@ export const getUserTests = /* GraphQL */ `query GetUserTests($id: ID!) {
     id
     impossibleAnswer
     mediumAnswer
+    points
     testId
     updatedAt
     userId
@@ -159,18 +160,10 @@ export const listUserAcheivements = /* GraphQL */ `query ListUserAcheivements(
 >;
 export const listUserStats = /* GraphQL */ `query ListUserStats(
   $filter: ModelUserStatsFilterInput
-  $id: ID
   $limit: Int
   $nextToken: String
-  $sortDirection: ModelSortDirection
 ) {
-  listUserStats(
-    filter: $filter
-    id: $id
-    limit: $limit
-    nextToken: $nextToken
-    sortDirection: $sortDirection
-  ) {
+  listUserStats(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       createdAt
       id
@@ -209,6 +202,7 @@ export const listUserTests = /* GraphQL */ `query ListUserTests(
       id
       impossibleAnswer
       mediumAnswer
+      points
       testId
       updatedAt
       userId

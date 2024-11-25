@@ -16,6 +16,7 @@ export default () => {
         backgroundColor: alpha(palette.primary.dark, 0.1),
         borderRadius: 4,
         p: 3,
+        mb: { xs: 2, sm: 4 },
       }}
     >
       <Box
