@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-west-2_rSPFSjqLu",
+    "user_pool_id": "us-west-2_CXGLQ2T7T",
     "aws_region": "us-west-2",
-    "user_pool_client_id": "6s9oo2g0gp85brvgl08b9ril18",
-    "identity_pool_id": "us-west-2:cc92d8df-f185-4a91-8658-6735caf131bb",
+    "user_pool_client_id": "6qus6brhr1lnfaurbcbb239unq",
+    "identity_pool_id": "us-west-2:48d1d6e5-4dd6-4e06-b2ac-247d138019b2",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email"
@@ -26,7 +26,7 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://c4rj2z2gwzhnvhlsjceqhwbery.appsync-api.us-west-2.amazonaws.com/graphql",
+    "url": "https://bytupsbk65ddhbhkmjcyivjrxm.appsync-api.us-west-2.amazonaws.com/graphql",
     "aws_region": "us-west-2",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
@@ -121,8 +121,7 @@
                     "allow": "public",
                     "provider": "iam",
                     "operations": [
-                      "read",
-                      "create"
+                      "read"
                     ]
                   },
                   {
@@ -193,6 +192,13 @@
               "isRequired": false,
               "attributes": []
             },
+            "points": {
+              "name": "points",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
             "createdAt": {
               "name": "createdAt",
               "isArray": false,
@@ -260,13 +266,6 @@
               "isRequired": true,
               "attributes": []
             },
-            "userId": {
-              "name": "userId",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
             "points": {
               "name": "points",
               "isArray": false,
@@ -320,7 +319,7 @@
                 "rules": [
                   {
                     "provider": "userPools",
-                    "ownerField": "userId",
+                    "ownerField": "id",
                     "allow": "owner",
                     "operations": [
                       "create",

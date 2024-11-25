@@ -13,6 +13,7 @@ export const upsertUserTest = async (upsertUserTest: {
   mediumAnswer?: string
   hardAnswer?: string
   impossibleAnswer?: string
+  points: number
 }) => {
   if (!upsertUserTest.testId) {
     throw new Error('testId is required')

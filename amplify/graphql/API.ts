@@ -48,7 +48,6 @@ export type UserStats = {
   points?: number | null,
   pokemonCaught?: Array< string | null > | null,
   updatedAt: string,
-  userId?: string | null,
 };
 
 export type UserTests = {
@@ -59,6 +58,7 @@ export type UserTests = {
   id: string,
   impossibleAnswer?: string | null,
   mediumAnswer?: string | null,
+  points?: number | null,
   testId?: string | null,
   updatedAt: string,
   userId?: string | null,
@@ -169,7 +169,6 @@ export type ModelUserStatsFilterInput = {
   points?: ModelIntInput | null,
   pokemonCaught?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userId?: ModelStringInput | null,
 };
 
 export type ModelIntInput = {
@@ -200,6 +199,7 @@ export type ModelUserTestsFilterInput = {
   mediumAnswer?: ModelStringInput | null,
   not?: ModelUserTestsFilterInput | null,
   or?: Array< ModelUserTestsFilterInput | null > | null,
+  points?: ModelIntInput | null,
   testId?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   userId?: ModelStringInput | null,
@@ -257,19 +257,18 @@ export type CreateUserAcheivementsInput = {
 export type ModelUserStatsConditionInput = {
   and?: Array< ModelUserStatsConditionInput | null > | null,
   createdAt?: ModelStringInput | null,
+  id?: ModelStringInput | null,
   not?: ModelUserStatsConditionInput | null,
   or?: Array< ModelUserStatsConditionInput | null > | null,
   points?: ModelIntInput | null,
   pokemonCaught?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  userId?: ModelStringInput | null,
 };
 
 export type CreateUserStatsInput = {
   id?: string | null,
   points?: number | null,
   pokemonCaught?: Array< string | null > | null,
-  userId?: string | null,
 };
 
 export type ModelUserTestsConditionInput = {
@@ -281,6 +280,7 @@ export type ModelUserTestsConditionInput = {
   mediumAnswer?: ModelStringInput | null,
   not?: ModelUserTestsConditionInput | null,
   or?: Array< ModelUserTestsConditionInput | null > | null,
+  points?: ModelIntInput | null,
   testId?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   userId?: ModelStringInput | null,
@@ -292,6 +292,7 @@ export type CreateUserTestsInput = {
   id?: string | null,
   impossibleAnswer?: string | null,
   mediumAnswer?: string | null,
+  points?: number | null,
   testId?: string | null,
   userId?: string | null,
 };
@@ -332,7 +333,6 @@ export type UpdateUserStatsInput = {
   id: string,
   points?: number | null,
   pokemonCaught?: Array< string | null > | null,
-  userId?: string | null,
 };
 
 export type UpdateUserTestsInput = {
@@ -341,6 +341,7 @@ export type UpdateUserTestsInput = {
   id: string,
   impossibleAnswer?: string | null,
   mediumAnswer?: string | null,
+  points?: number | null,
   testId?: string | null,
   userId?: string | null,
 };
@@ -398,12 +399,11 @@ export type ModelSubscriptionUserAcheivementsFilterInput = {
 export type ModelSubscriptionUserStatsFilterInput = {
   and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
   createdAt?: ModelSubscriptionStringInput | null,
-  id?: ModelSubscriptionIDInput | null,
+  id?: ModelStringInput | null,
   or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
   points?: ModelSubscriptionIntInput | null,
   pokemonCaught?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  userId?: ModelStringInput | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -427,6 +427,7 @@ export type ModelSubscriptionUserTestsFilterInput = {
   impossibleAnswer?: ModelSubscriptionStringInput | null,
   mediumAnswer?: ModelSubscriptionStringInput | null,
   or?: Array< ModelSubscriptionUserTestsFilterInput | null > | null,
+  points?: ModelSubscriptionIntInput | null,
   testId?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   userId?: ModelStringInput | null,
@@ -502,7 +503,6 @@ export type GetUserStatsQuery = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -519,6 +519,7 @@ export type GetUserTestsQuery = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -589,7 +590,6 @@ export type ListUserStatsQuery = {
       points?: number | null,
       pokemonCaught?: Array< string | null > | null,
       updatedAt: string,
-      userId?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -614,6 +614,7 @@ export type ListUserTestsQuery = {
       id: string,
       impossibleAnswer?: string | null,
       mediumAnswer?: string | null,
+      points?: number | null,
       testId?: string | null,
       updatedAt: string,
       userId?: string | null,
@@ -695,7 +696,6 @@ export type CreateUserStatsMutation = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -713,6 +713,7 @@ export type CreateUserTestsMutation = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -792,7 +793,6 @@ export type DeleteUserStatsMutation = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -810,6 +810,7 @@ export type DeleteUserTestsMutation = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -889,7 +890,6 @@ export type UpdateUserStatsMutation = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -907,6 +907,7 @@ export type UpdateUserTestsMutation = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -974,7 +975,7 @@ export type OnCreateUserAcheivementsSubscription = {
 
 export type OnCreateUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
-  userId?: string | null,
+  id?: string | null,
 };
 
 export type OnCreateUserStatsSubscription = {
@@ -985,7 +986,6 @@ export type OnCreateUserStatsSubscription = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -1003,6 +1003,7 @@ export type OnCreateUserTestsSubscription = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -1070,7 +1071,7 @@ export type OnDeleteUserAcheivementsSubscription = {
 
 export type OnDeleteUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
-  userId?: string | null,
+  id?: string | null,
 };
 
 export type OnDeleteUserStatsSubscription = {
@@ -1081,7 +1082,6 @@ export type OnDeleteUserStatsSubscription = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -1099,6 +1099,7 @@ export type OnDeleteUserTestsSubscription = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,
@@ -1166,7 +1167,7 @@ export type OnUpdateUserAcheivementsSubscription = {
 
 export type OnUpdateUserStatsSubscriptionVariables = {
   filter?: ModelSubscriptionUserStatsFilterInput | null,
-  userId?: string | null,
+  id?: string | null,
 };
 
 export type OnUpdateUserStatsSubscription = {
@@ -1177,7 +1178,6 @@ export type OnUpdateUserStatsSubscription = {
     points?: number | null,
     pokemonCaught?: Array< string | null > | null,
     updatedAt: string,
-    userId?: string | null,
   } | null,
 };
 
@@ -1195,6 +1195,7 @@ export type OnUpdateUserTestsSubscription = {
     id: string,
     impossibleAnswer?: string | null,
     mediumAnswer?: string | null,
+    points?: number | null,
     testId?: string | null,
     updatedAt: string,
     userId?: string | null,

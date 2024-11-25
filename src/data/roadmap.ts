@@ -42,6 +42,7 @@ export default [
     id: uuidv4(),
     title: 'User Stats',
     content: `Let users see their stats.`,
+    dateCompleted: new Date('2024-11-25'),
   },
   {
     id: uuidv4(),
