@@ -24,12 +24,13 @@ export default ({
   children: React.ReactNode
 }) => {
   const { setPokemonQuestions, setCurrentQuestion } = useQuestionStore()
-  const { setGameType } = useGameTypeStore()
+  const { setGameType, setGameOverModalOpen } = useGameTypeStore()
   const { clearInput, setSelectedPokemon } = useInputStore()
   const { setInvalidGuess, setIsEqualPokemon, setDisplayAnswer } =
     useAnswerStore()
 
   useEffect(() => {
+    setGameOverModalOpen(false)
     setGameType(gameType)
     setPokemonQuestions(pokemonQuestions)
 
