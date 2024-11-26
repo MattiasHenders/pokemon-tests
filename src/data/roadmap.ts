@@ -46,6 +46,12 @@ export default [
   },
   {
     id: uuidv4(),
+    title: 'Launch Version 1.0',
+    content: `Launch Version 1.0 on Reddit, will give the first users a chance to test and get a special cosmetic ball.`,
+    dateCompleted: new Date('2024-11-26'),
+  },
+  {
+    id: uuidv4(),
     title: 'User Acheivements',
     content: `Let users track achievements, maybe custom pokeballs for first x users, etc.`,
   },
@@ -56,7 +62,17 @@ export default [
   },
   {
     id: uuidv4(),
+    title: 'More questions',
+    content: `Add more questions to the game. Like pokemon that would be weak to X etc.`,
+  },
+  {
+    id: uuidv4(),
     title: 'Leaderboard',
     content: `Add a global leaderboard. Let users know who is the very best! Completeing daily levels increases rank.`,
+  },
+  {
+    id: uuidv4(),
+    title: 'Handle Megas and GMax',
+    content: `Add support for Megas and GMax. More questions around them will be added.`,
   },
 ] as RoadmapItem[]

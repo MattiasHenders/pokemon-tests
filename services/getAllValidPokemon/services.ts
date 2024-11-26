@@ -21,6 +21,9 @@ const getAllValidPokemon = (): Species[] => {
     (s) => !ILLEGAL_FORMS.includes(s.forme)
   )
 
+  // Remove Megas
+  allLegalPokemon = allLegalPokemon.filter((s) => !s.isMega)
+
   return allLegalPokemon
 }
 
