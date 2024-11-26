@@ -22,7 +22,7 @@ export default () => {
     setDisplayAnswer,
   } = useAnswerStore()
   const { selectedPokemon, setSelectedPokemon, clearInput } = useInputStore()
-  const { gameType } = useGameTypeStore()
+  const { gameType, setGameOverModalOpen } = useGameTypeStore()
   const { user } = useAuthenticator()
   const router = useRouter()
 
@@ -41,6 +41,7 @@ export default () => {
         setButtonText('Reset Game')
       } else {
         setButtonText('Play Unlimited')
+        setTimeout(() => setGameOverModalOpen(true), 2000)
       }
       return
     }
@@ -55,6 +56,7 @@ export default () => {
       setButtonText('Reset Game')
     } else {
       setButtonText('Play Unlimited')
+      setTimeout(() => setGameOverModalOpen(true), 2000)
     }
   }, [displayAnswer, invalidGuess, isEqualPokemon, currentQuestion])
 

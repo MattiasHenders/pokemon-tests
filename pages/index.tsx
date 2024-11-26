@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { Box } from '@mui/material'
 import QuestionDisplay from '@/src/components/pages/home/QuestionDisplay'
@@ -15,6 +15,7 @@ import {
 import { GameType } from '@/src/stores/game'
 import GameManager from '@/src/components/common/GameManager'
 import GameTypeDisplay from '@/src/components/pages/home/GameTypeDisplay'
+import GameDoneModal from '@/src/components/pages/home/GameDoneModal'
 
 interface HomePageProps {
   pokemonQuestions: Schema['DailyTest']['type']
@@ -68,6 +69,7 @@ const HomePage: NextPage<HomePageProps> = ({ pokemonQuestions }) => {
           </Box>
         </Box>
       </Box>
+      <GameDoneModal />
     </GameManager>
   )
 }
