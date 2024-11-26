@@ -9,6 +9,7 @@ import { upsertUserTest } from '@/requests/UserTests'
 import { GameType, useGameTypeStore } from '@/src/stores/game'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import posthog from 'posthog-js'
 
 export default () => {
   const { pokemonQuestions, currentQuestion, setCurrentQuestion } =
@@ -136,14 +137,21 @@ export default () => {
     // Check if the answer is invalid
     if (invalidGuess) {
       setInvalidGuess(true)
-      return
     }
 
     // Check if the answer is equal, and therefore a fail
     if (isEqualPokemon) {
       setIsEqualPokemon(true)
-      return
     }
+
+    posthog.capture('submit_answer', {
+      gameType: gameType === GameType.UNLIMITED ? 'unlimited' : 'daily',
+      difficulty: currentQuestion.difficulty,
+      guessedPokemon: selectedPokemon?.name,
+      currentQuestion: currentQuestion,
+      isInvalid: invalidGuess,
+      isEqual: isEqualPokemon,
+    })
   }
 
   const calculatePoints = (
