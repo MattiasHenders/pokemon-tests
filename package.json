@@ -27,6 +27,7 @@
     "next": "14.2.10",
     "posthog-js": "^1.189.0",
     "react": "^18",
+    "react-countdown": "^2.3.6",
     "react-dom": "^18",
     "typescript-eslint": "^8.11.0",
     "uuid": "^11.0.3",
