@@ -10,6 +10,7 @@ import { Dex } from '@pkmn/dex'
 import { useAnswerStore } from '@/src/stores/answer'
 import { Nullable } from '@aws-amplify/data-schema'
 import { getCurrentUser } from 'aws-amplify/auth'
+import posthog from 'posthog-js'
 
 Amplify.configure(outputs)
 const client = generateClient<Schema>()
@@ -76,6 +77,10 @@ export default ({
         setSelectedPokemon(null)
         setDisplayAnswer(false)
         setIsEqualPokemon(null)
+        posthog.capture('game_started', {
+          gameType: 'daily',
+          previousDifficulty: 'none',
+        })
         return
       }
 
@@ -111,6 +116,11 @@ export default ({
             )
           break
       }
+
+      posthog.capture('game_started', {
+        gameType: 'daily',
+        previousDifficulty: currentQuestionDifficulty,
+      })
     }
     // If the game type is unlimited, set it to the easy question
     else {
@@ -121,6 +131,11 @@ export default ({
       setSelectedPokemon(null)
       setDisplayAnswer(false)
       setIsEqualPokemon(null)
+
+      posthog.capture('game_started', {
+        gameType: 'unlimited',
+        previousDifficulty: 'none',
+      })
     }
   }
 
