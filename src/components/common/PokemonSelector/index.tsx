@@ -12,6 +12,7 @@ import SinglePokemonSelect from './SinglePokemonSelect'
 import { useAnswerStore } from '@/src/stores/answer'
 import { useInputStore } from '@/src/stores/input'
 import { palette } from '@/styles/palette'
+import posthog from 'posthog-js'
 
 export default () => {
   const { input, setInput, setSelectedPokemon } = useInputStore()
@@ -48,8 +49,9 @@ export default () => {
         hint.current = ''
       }}
       onChange={(_: any, newValue: Species | string | null) => {
-        if (newValue && typeof newValue !== 'string')
+        if (newValue && typeof newValue !== 'string') {
           setSelectedPokemon(newValue)
+        }
         setIsOpen(false)
       }}
       onInputChange={(event, value) => handleInputChange(event, value)}

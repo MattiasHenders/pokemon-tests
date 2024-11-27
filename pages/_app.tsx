@@ -8,6 +8,7 @@ import { Authenticator } from '@aws-amplify/ui-react'
 import '@aws-amplify/ui-react/styles.css'
 import { identifyUser, PostHogProviderWrapper } from '@/utils/tracking'
 import { Hub } from 'aws-amplify/utils'
+import posthog from 'posthog-js'
 
 Amplify.configure(outputs, { ssr: true })
 
@@ -15,6 +16,9 @@ Hub.listen('auth', ({ payload }) => {
   switch (payload.event) {
     case 'signedIn':
       identifyUser()
+      break
+    case 'signedOut':
+      posthog.capture('user_logout')
       break
   }
 })

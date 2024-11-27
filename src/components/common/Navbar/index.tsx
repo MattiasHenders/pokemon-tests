@@ -79,7 +79,6 @@ function ResponsiveAppBar() {
               handleClose={handleCloseNavMenu}
             />
           </Box>
-          {/* <Link href={'/'}> */}
           <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
             <Image
               src="/img/balls/poke.webp"
@@ -88,8 +87,6 @@ function ResponsiveAppBar() {
               alt="pokeball logo"
             />
           </Box>
-          {/* </Link> */}
-          {/* <Link href={'/'}> */}
           <Typography
             variant="h5"
             noWrap
@@ -108,7 +105,6 @@ function ResponsiveAppBar() {
           >
             WITP
           </Typography>
-          {/* </Link> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {routes.map((route) => (
               <Link href={route.path} key={route.id}>
