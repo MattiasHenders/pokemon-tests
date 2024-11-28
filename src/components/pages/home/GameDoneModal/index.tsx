@@ -82,13 +82,15 @@ export default () => {
                 <Typography sx={{ mb: 2, color: palette.primary.darkText }}>
                   Want to save your scores, get acheivements, and more?
                 </Typography>
-                <StyledButton
-                  variant="contained"
-                  size="large"
-                  onClick={() => router.push('/auth')}
-                >
-                  Click here to sign up!
-                </StyledButton>
+                <Box sx={{ my: 2, display: 'flex', justifyContent: 'center' }}>
+                  <StyledButton
+                    variant="contained"
+                    size="large"
+                    onClick={() => router.push('/auth')}
+                  >
+                    Click here to sign up!
+                  </StyledButton>
+                </Box>
               </>
             )}
             <Box

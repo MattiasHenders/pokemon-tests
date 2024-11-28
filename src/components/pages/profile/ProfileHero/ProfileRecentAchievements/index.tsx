@@ -30,7 +30,6 @@ export default () => {
           throw new Error(errors[0].message)
         }
 
-        console.log(userAcheivements)
         setUserAcheivements(userAcheivements)
       } catch (error) {
         console.log(error)

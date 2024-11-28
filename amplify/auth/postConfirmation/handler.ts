@@ -36,7 +36,6 @@ Amplify.configure(
 const client = generateClient<Schema>()
 
 export const handler: PostConfirmationTriggerHandler = async (event) => {
-  console.log(event)
   await client.graphql({
     query: createUserStats,
     variables: {

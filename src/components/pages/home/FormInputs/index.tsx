@@ -10,8 +10,11 @@ import { GameType, useGameTypeStore } from '@/src/stores/game'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import posthog from 'posthog-js'
+import { useDailyTestStore } from '@/src/stores/daily'
+import { Schema } from '@/amplify/data/resource'
 
 export default () => {
+  const { lastDailyGame, setLastDailyGame } = useDailyTestStore()
   const { pokemonQuestions, currentQuestion, setCurrentQuestion } =
     useQuestionStore()
   const {
@@ -119,6 +122,13 @@ export default () => {
     const isEqualPokemon =
       currentQuestion.pokemonToGuess === selectedPokemon?.name
 
+    // Save the results incase the user is not logged in
+    saveResults(
+      isEqualPokemon,
+      invalidGuess,
+      currentQuestion.difficulty || 'error'
+    )
+
     // Submit Results if the user is logged in
     if (
       user &&
@@ -152,6 +162,59 @@ export default () => {
       isInvalid: invalidGuess,
       isEqual: isEqualPokemon,
     })
+  }
+
+  const saveResults = (
+    isEqualPokemon: boolean,
+    invalidGuess: boolean,
+    difficulty: 'easy' | 'medium' | 'hard' | 'impossible' | 'error'
+  ) => {
+    if (gameType === GameType.UNLIMITED) {
+      return
+    }
+
+    const points = calculatePoints(isEqualPokemon, invalidGuess, difficulty)
+
+    if (
+      lastDailyGame?.testId?.toString() !== pokemonQuestions?.id?.toString()
+    ) {
+      setLastDailyGame(undefined)
+    }
+
+    switch (currentQuestion.difficulty) {
+      case 'easy':
+        setLastDailyGame({
+          ...lastDailyGame,
+          testId: pokemonQuestions?.id as string,
+          easyAnswer: selectedPokemon?.name as string,
+          points,
+        } as Schema['UserTests']['type'])
+        break
+      case 'medium':
+        setLastDailyGame({
+          ...lastDailyGame,
+          testId: pokemonQuestions?.id as string,
+          mediumAnswer: selectedPokemon?.name as string,
+          points,
+        } as Schema['UserTests']['type'])
+        break
+      case 'hard':
+        setLastDailyGame({
+          ...lastDailyGame,
+          testId: pokemonQuestions?.id as string,
+          hardAnswer: selectedPokemon?.name as string,
+          points,
+        } as Schema['UserTests']['type'])
+        break
+      case 'impossible':
+        setLastDailyGame({
+          ...lastDailyGame,
+          testId: pokemonQuestions?.id as string,
+          impossibleAnswer: selectedPokemon?.name as string,
+          points,
+        } as Schema['UserTests']['type'])
+        break
+    }
   }
 
   const calculatePoints = (

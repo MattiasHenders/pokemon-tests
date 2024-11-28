@@ -53,7 +53,6 @@ export const handler: DynamoDBStreamHandler = async (event) => {
   }
 
   for (const record of event.Records) {
-    console.log('record', record)
     if (record.eventName === 'INSERT' || record.eventName === 'MODIFY') {
       // Get the new daily test
       const dailyTest = record.dynamodb?.NewImage

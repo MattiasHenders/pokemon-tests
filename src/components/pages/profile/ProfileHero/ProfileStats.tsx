@@ -29,7 +29,6 @@ export default () => {
           throw new Error(errors[0].message)
         }
 
-        console.log(userStats)
         setPokemonCaught(userStats?.pokemonCaught?.length || 0)
       } catch (error) {
         console.log(error)
