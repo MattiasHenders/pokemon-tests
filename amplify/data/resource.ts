@@ -63,6 +63,16 @@ const schema = a
       .authorization((allow) => [
         allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
       ]),
+
+    UserFeedback: a
+      .model({
+        id: a.id(),
+        userId: a.string(),
+        feedback: a.string(),
+      })
+      .authorization((allow) => [
+        allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
+      ]),
   })
   .authorization((allow) => [
     allow.resource(postConfirmation).to(['mutate']),

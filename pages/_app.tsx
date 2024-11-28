@@ -11,6 +11,7 @@ import { Hub } from 'aws-amplify/utils'
 import posthog from 'posthog-js'
 import handleAddLastGame from '@/services/handleAddLastGame'
 import { useDailyTestStore } from '@/src/stores/daily'
+import { SnackbarProvider } from 'notistack'
 
 Amplify.configure(outputs, { ssr: true })
 
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [triggerUserTestCreateOnSignin, setTriggerUserTestCreateOnSignin] =
     useState(false)
   const { lastDailyGame } = useDailyTestStore()
+
   useEffect(() => {
     identifyUser()
   }, [])
@@ -50,8 +52,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Authenticator.Provider>
         <PostHogProviderWrapper>
-          <Navbar />
-          <Component {...pageProps} />
+          <SnackbarProvider maxSnack={3}>
+            <Navbar />
+            <Component {...pageProps} />
+          </SnackbarProvider>
         </PostHogProviderWrapper>
       </Authenticator.Provider>
     </>

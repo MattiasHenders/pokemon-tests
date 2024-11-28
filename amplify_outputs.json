@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-west-2_CXGLQ2T7T",
+    "user_pool_id": "us-west-2_ktMKdorhF",
     "aws_region": "us-west-2",
-    "user_pool_client_id": "6qus6brhr1lnfaurbcbb239unq",
-    "identity_pool_id": "us-west-2:48d1d6e5-4dd6-4e06-b2ac-247d138019b2",
+    "user_pool_client_id": "qsodfmdcn1kn9rjr2parupkpq",
+    "identity_pool_id": "us-west-2:527f12f9-5e71-4878-807f-c173e259ad43",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email"
@@ -26,7 +26,7 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://bytupsbk65ddhbhkmjcyivjrxm.appsync-api.us-west-2.amazonaws.com/graphql",
+    "url": "https://twwgpiyhqvfdniyuflgvygqhde.appsync-api.us-west-2.amazonaws.com/graphql",
     "aws_region": "us-west-2",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
@@ -395,6 +395,87 @@
           },
           "syncable": true,
           "pluralName": "UserAcheivements",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "id"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "userId",
+                    "allow": "owner",
+                    "operations": [
+                      "create",
+                      "read",
+                      "update"
+                    ],
+                    "identityClaim": "cognito:username"
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "UserFeedback": {
+          "name": "UserFeedback",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "feedback": {
+              "name": "feedback",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "UserFeedbacks",
           "attributes": [
             {
               "type": "model",

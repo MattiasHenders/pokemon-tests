@@ -1,16 +1,18 @@
 import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
-import { Container } from '@mui/material'
+import { Box, Divider } from '@mui/material'
 import HomeHero from '@/src/components/common/Heros/HomeHero'
-import ContactDetails from '@/src/components/pages/contact/ContactDetails'
+import ContactCreator from '@/src/components/pages/contact/ContactCreator'
+import ContactThanksToPokeTests from '@/src/components/pages/contact/ContactThanksToPokeTests'
+import { palette } from '@/styles/palette'
 
 interface ContactPageProps {}
 
 const ContactPage: NextPage<ContactPageProps> = () => {
   return (
-    <Container
+    <Box
       sx={{
-        my: 5,
+        mt: 4,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -18,8 +20,16 @@ const ContactPage: NextPage<ContactPageProps> = () => {
       }}
     >
       <HomeHero />
-      <ContactDetails />
-    </Container>
+      <ContactCreator />
+      <Divider
+        sx={{
+          my: 5,
+          width: '90%',
+          backgroundColor: palette.primary.lightText,
+        }}
+      />
+      <ContactThanksToPokeTests />
+    </Box>
   )
 }
 

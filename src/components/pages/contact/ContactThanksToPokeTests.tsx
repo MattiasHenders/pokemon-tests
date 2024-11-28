@@ -13,17 +13,29 @@ export default () => {
         alignItems: 'center',
       }}
     >
-      <Typography variant="h4" sx={{ color: palette.primary.lightText }}>
-        Contact Us
+      <Typography
+        variant="h4"
+        sx={{
+          color: palette.primary.lightText,
+          textAlign: 'center',
+          fontSize: { xs: 22, sm: 26, md: 28 },
+        }}
+      >
+        Thanks to Pokémon Tests
       </Typography>
-      <Typography variant="body1" sx={{ color: palette.primary.lightText }}>
+      <Typography
+        variant="body1"
+        sx={{ color: palette.primary.lightText, textAlign: 'center' }}
+      >
         The idea for this came from the following instagram account:{' '}
         <Link
           color="inherit"
           href="https://www.instagram.com/pokemon.tests/"
           target="_blank"
         >
-          @pokemon.tests
+          <Box component="span" sx={{ color: palette.primary.lightText }}>
+            @pokemon.tests
+          </Box>
         </Link>
       </Typography>
     </Box>
