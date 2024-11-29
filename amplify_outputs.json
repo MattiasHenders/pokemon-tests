@@ -355,22 +355,8 @@
               "isRequired": false,
               "attributes": []
             },
-            "name": {
-              "name": "name",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "description": {
-              "name": "description",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "image": {
-              "name": "image",
+            "acheivementId": {
+              "name": "acheivementId",
               "isArray": false,
               "type": "String",
               "isRequired": false,

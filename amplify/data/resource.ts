@@ -56,9 +56,7 @@ const schema = a
       .model({
         id: a.id(),
         userId: a.string(),
-        name: a.string(),
-        description: a.string(),
-        image: a.string(),
+        acheivementId: a.string(),
       })
       .authorization((allow) => [
         allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),
