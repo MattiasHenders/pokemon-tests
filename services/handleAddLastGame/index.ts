@@ -26,6 +26,21 @@ export default async (
     return
   }
 
+  const { data: dailyTest, errors: dailyTestErrors } =
+    await client.models.DailyTest.get({ id: lastDailyGame.testId as string })
+
+  if (dailyTestErrors) {
+    return
+  }
+
+  // Check if the test being update is for the current day in UTC
+  if (
+    dailyTest?.createdAt.split('T')[0] !==
+    new Date().toISOString().split('T')[0]
+  ) {
+    return
+  }
+
   if (lastDailyGame.testId) {
     await client.models.UserTests.create({
       ...lastDailyGame,

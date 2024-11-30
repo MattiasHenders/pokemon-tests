@@ -14,7 +14,6 @@ export default async (
 
   for (const milestoneAchievement of milestoneAchievementsToUpdate) {
     const milestoneAchievementId = milestoneAchievement.id
-
     if (!milestoneAchievementId) {
       continue
     }
