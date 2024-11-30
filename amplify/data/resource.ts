@@ -57,6 +57,9 @@ const schema = a
         id: a.id(),
         userId: a.string(),
         acheivementId: a.string(),
+        completed: a.boolean().default(false),
+        progress: a.integer().default(0),
+        total: a.integer().default(0),
       })
       .authorization((allow) => [
         allow.ownerDefinedIn('userId').to(['create', 'read', 'update']),

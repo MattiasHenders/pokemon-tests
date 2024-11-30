@@ -32,11 +32,21 @@ export enum PokemonQuestionDifficulty {
 
 export type UserAcheivements = {
   __typename: "UserAcheivements",
+  acheivementId?: string | null,
+  completed?: boolean | null,
   createdAt: string,
-  description?: string | null,
   id: string,
-  image?: string | null,
-  name?: string | null,
+  progress?: number | null,
+  total?: number | null,
+  updatedAt: string,
+  userId?: string | null,
+};
+
+export type UserFeedback = {
+  __typename: "UserFeedback",
+  createdAt: string,
+  feedback?: string | null,
+  id: string,
   updatedAt: string,
   userId?: string | null,
 };
@@ -142,33 +152,24 @@ export type ModelDailyTestConnection = {
 };
 
 export type ModelUserAcheivementsFilterInput = {
+  acheivementId?: ModelStringInput | null,
   and?: Array< ModelUserAcheivementsFilterInput | null > | null,
+  completed?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
-  description?: ModelStringInput | null,
   id?: ModelIDInput | null,
-  image?: ModelStringInput | null,
-  name?: ModelStringInput | null,
   not?: ModelUserAcheivementsFilterInput | null,
   or?: Array< ModelUserAcheivementsFilterInput | null > | null,
+  progress?: ModelIntInput | null,
+  total?: ModelIntInput | null,
   updatedAt?: ModelStringInput | null,
   userId?: ModelStringInput | null,
 };
 
-export type ModelUserAcheivementsConnection = {
-  __typename: "ModelUserAcheivementsConnection",
-  items:  Array<UserAcheivements | null >,
-  nextToken?: string | null,
-};
-
-export type ModelUserStatsFilterInput = {
-  and?: Array< ModelUserStatsFilterInput | null > | null,
-  createdAt?: ModelStringInput | null,
-  id?: ModelIDInput | null,
-  not?: ModelUserStatsFilterInput | null,
-  or?: Array< ModelUserStatsFilterInput | null > | null,
-  points?: ModelIntInput | null,
-  pokemonCaught?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
+export type ModelBooleanInput = {
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
 export type ModelIntInput = {
@@ -181,6 +182,40 @@ export type ModelIntInput = {
   le?: number | null,
   lt?: number | null,
   ne?: number | null,
+};
+
+export type ModelUserAcheivementsConnection = {
+  __typename: "ModelUserAcheivementsConnection",
+  items:  Array<UserAcheivements | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUserFeedbackFilterInput = {
+  and?: Array< ModelUserFeedbackFilterInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  feedback?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  not?: ModelUserFeedbackFilterInput | null,
+  or?: Array< ModelUserFeedbackFilterInput | null > | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
+};
+
+export type ModelUserFeedbackConnection = {
+  __typename: "ModelUserFeedbackConnection",
+  items:  Array<UserFeedback | null >,
+  nextToken?: string | null,
+};
+
+export type ModelUserStatsFilterInput = {
+  and?: Array< ModelUserStatsFilterInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  id?: ModelIDInput | null,
+  not?: ModelUserStatsFilterInput | null,
+  or?: Array< ModelUserStatsFilterInput | null > | null,
+  points?: ModelIntInput | null,
+  pokemonCaught?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
 };
 
 export type ModelUserStatsConnection = {
@@ -235,22 +270,40 @@ export type PokemonQuestionInput = {
 };
 
 export type ModelUserAcheivementsConditionInput = {
+  acheivementId?: ModelStringInput | null,
   and?: Array< ModelUserAcheivementsConditionInput | null > | null,
+  completed?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  image?: ModelStringInput | null,
-  name?: ModelStringInput | null,
   not?: ModelUserAcheivementsConditionInput | null,
   or?: Array< ModelUserAcheivementsConditionInput | null > | null,
+  progress?: ModelIntInput | null,
+  total?: ModelIntInput | null,
   updatedAt?: ModelStringInput | null,
   userId?: ModelStringInput | null,
 };
 
 export type CreateUserAcheivementsInput = {
-  description?: string | null,
+  acheivementId?: string | null,
+  completed?: boolean | null,
   id?: string | null,
-  image?: string | null,
-  name?: string | null,
+  progress?: number | null,
+  total?: number | null,
+  userId?: string | null,
+};
+
+export type ModelUserFeedbackConditionInput = {
+  and?: Array< ModelUserFeedbackConditionInput | null > | null,
+  createdAt?: ModelStringInput | null,
+  feedback?: ModelStringInput | null,
+  not?: ModelUserFeedbackConditionInput | null,
+  or?: Array< ModelUserFeedbackConditionInput | null > | null,
+  updatedAt?: ModelStringInput | null,
+  userId?: ModelStringInput | null,
+};
+
+export type CreateUserFeedbackInput = {
+  feedback?: string | null,
+  id?: string | null,
   userId?: string | null,
 };
 
@@ -305,6 +358,10 @@ export type DeleteUserAcheivementsInput = {
   id: string,
 };
 
+export type DeleteUserFeedbackInput = {
+  id: string,
+};
+
 export type DeleteUserStatsInput = {
   id: string,
 };
@@ -322,10 +379,17 @@ export type UpdateDailyTestInput = {
 };
 
 export type UpdateUserAcheivementsInput = {
-  description?: string | null,
+  acheivementId?: string | null,
+  completed?: boolean | null,
   id: string,
-  image?: string | null,
-  name?: string | null,
+  progress?: number | null,
+  total?: number | null,
+  userId?: string | null,
+};
+
+export type UpdateUserFeedbackInput = {
+  feedback?: string | null,
+  id: string,
   userId?: string | null,
 };
 
@@ -385,25 +449,21 @@ export type ModelSubscriptionIDInput = {
 };
 
 export type ModelSubscriptionUserAcheivementsFilterInput = {
+  acheivementId?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserAcheivementsFilterInput | null > | null,
+  completed?: ModelSubscriptionBooleanInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
   id?: ModelSubscriptionIDInput | null,
-  image?: ModelSubscriptionStringInput | null,
-  name?: ModelSubscriptionStringInput | null,
   or?: Array< ModelSubscriptionUserAcheivementsFilterInput | null > | null,
+  progress?: ModelSubscriptionIntInput | null,
+  total?: ModelSubscriptionIntInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   userId?: ModelStringInput | null,
 };
 
-export type ModelSubscriptionUserStatsFilterInput = {
-  and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  id?: ModelStringInput | null,
-  or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
-  points?: ModelSubscriptionIntInput | null,
-  pokemonCaught?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
+export type ModelSubscriptionBooleanInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -416,6 +476,26 @@ export type ModelSubscriptionIntInput = {
   lt?: number | null,
   ne?: number | null,
   notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionUserFeedbackFilterInput = {
+  and?: Array< ModelSubscriptionUserFeedbackFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  feedback?: ModelSubscriptionStringInput | null,
+  id?: ModelSubscriptionIDInput | null,
+  or?: Array< ModelSubscriptionUserFeedbackFilterInput | null > | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  userId?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionUserStatsFilterInput = {
+  and?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  id?: ModelStringInput | null,
+  or?: Array< ModelSubscriptionUserStatsFilterInput | null > | null,
+  points?: ModelSubscriptionIntInput | null,
+  pokemonCaught?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
 };
 
 export type ModelSubscriptionUserTestsFilterInput = {
@@ -481,11 +561,27 @@ export type GetUserAcheivementsQueryVariables = {
 export type GetUserAcheivementsQuery = {
   getUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type GetUserFeedbackQueryVariables = {
+  id: string,
+};
+
+export type GetUserFeedbackQuery = {
+  getUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,
@@ -560,11 +656,35 @@ export type ListUserAcheivementsQuery = {
     __typename: "ModelUserAcheivementsConnection",
     items:  Array< {
       __typename: "UserAcheivements",
+      acheivementId?: string | null,
+      completed?: boolean | null,
       createdAt: string,
-      description?: string | null,
       id: string,
-      image?: string | null,
-      name?: string | null,
+      progress?: number | null,
+      total?: number | null,
+      updatedAt: string,
+      userId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListUserFeedbacksQueryVariables = {
+  filter?: ModelUserFeedbackFilterInput | null,
+  id?: string | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
+};
+
+export type ListUserFeedbacksQuery = {
+  listUserFeedbacks?:  {
+    __typename: "ModelUserFeedbackConnection",
+    items:  Array< {
+      __typename: "UserFeedback",
+      createdAt: string,
+      feedback?: string | null,
+      id: string,
       updatedAt: string,
       userId?: string | null,
     } | null >,
@@ -673,11 +793,28 @@ export type CreateUserAcheivementsMutationVariables = {
 export type CreateUserAcheivementsMutation = {
   createUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type CreateUserFeedbackMutationVariables = {
+  condition?: ModelUserFeedbackConditionInput | null,
+  input: CreateUserFeedbackInput,
+};
+
+export type CreateUserFeedbackMutation = {
+  createUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,
@@ -770,11 +907,28 @@ export type DeleteUserAcheivementsMutationVariables = {
 export type DeleteUserAcheivementsMutation = {
   deleteUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type DeleteUserFeedbackMutationVariables = {
+  condition?: ModelUserFeedbackConditionInput | null,
+  input: DeleteUserFeedbackInput,
+};
+
+export type DeleteUserFeedbackMutation = {
+  deleteUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,
@@ -867,11 +1021,28 @@ export type UpdateUserAcheivementsMutationVariables = {
 export type UpdateUserAcheivementsMutation = {
   updateUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type UpdateUserFeedbackMutationVariables = {
+  condition?: ModelUserFeedbackConditionInput | null,
+  input: UpdateUserFeedbackInput,
+};
+
+export type UpdateUserFeedbackMutation = {
+  updateUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,
@@ -963,11 +1134,28 @@ export type OnCreateUserAcheivementsSubscriptionVariables = {
 export type OnCreateUserAcheivementsSubscription = {
   onCreateUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type OnCreateUserFeedbackSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFeedbackFilterInput | null,
+  userId?: string | null,
+};
+
+export type OnCreateUserFeedbackSubscription = {
+  onCreateUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,
@@ -1059,11 +1247,28 @@ export type OnDeleteUserAcheivementsSubscriptionVariables = {
 export type OnDeleteUserAcheivementsSubscription = {
   onDeleteUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type OnDeleteUserFeedbackSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFeedbackFilterInput | null,
+  userId?: string | null,
+};
+
+export type OnDeleteUserFeedbackSubscription = {
+  onDeleteUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,
@@ -1155,11 +1360,28 @@ export type OnUpdateUserAcheivementsSubscriptionVariables = {
 export type OnUpdateUserAcheivementsSubscription = {
   onUpdateUserAcheivements?:  {
     __typename: "UserAcheivements",
+    acheivementId?: string | null,
+    completed?: boolean | null,
     createdAt: string,
-    description?: string | null,
     id: string,
-    image?: string | null,
-    name?: string | null,
+    progress?: number | null,
+    total?: number | null,
+    updatedAt: string,
+    userId?: string | null,
+  } | null,
+};
+
+export type OnUpdateUserFeedbackSubscriptionVariables = {
+  filter?: ModelSubscriptionUserFeedbackFilterInput | null,
+  userId?: string | null,
+};
+
+export type OnUpdateUserFeedbackSubscription = {
+  onUpdateUserFeedback?:  {
+    __typename: "UserFeedback",
+    createdAt: string,
+    feedback?: string | null,
+    id: string,
     updatedAt: string,
     userId?: string | null,
   } | null,

@@ -53,11 +53,12 @@ export const onCreateUserAcheivements = /* GraphQL */ `subscription OnCreateUser
   $userId: String
 ) {
   onCreateUserAcheivements(filter: $filter, userId: $userId) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -66,6 +67,23 @@ export const onCreateUserAcheivements = /* GraphQL */ `subscription OnCreateUser
 ` as GeneratedSubscription<
   APITypes.OnCreateUserAcheivementsSubscriptionVariables,
   APITypes.OnCreateUserAcheivementsSubscription
+>;
+export const onCreateUserFeedback = /* GraphQL */ `subscription OnCreateUserFeedback(
+  $filter: ModelSubscriptionUserFeedbackFilterInput
+  $userId: String
+) {
+  onCreateUserFeedback(filter: $filter, userId: $userId) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateUserFeedbackSubscriptionVariables,
+  APITypes.OnCreateUserFeedbackSubscription
 >;
 export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats(
   $filter: ModelSubscriptionUserStatsFilterInput
@@ -151,11 +169,12 @@ export const onDeleteUserAcheivements = /* GraphQL */ `subscription OnDeleteUser
   $userId: String
 ) {
   onDeleteUserAcheivements(filter: $filter, userId: $userId) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -164,6 +183,23 @@ export const onDeleteUserAcheivements = /* GraphQL */ `subscription OnDeleteUser
 ` as GeneratedSubscription<
   APITypes.OnDeleteUserAcheivementsSubscriptionVariables,
   APITypes.OnDeleteUserAcheivementsSubscription
+>;
+export const onDeleteUserFeedback = /* GraphQL */ `subscription OnDeleteUserFeedback(
+  $filter: ModelSubscriptionUserFeedbackFilterInput
+  $userId: String
+) {
+  onDeleteUserFeedback(filter: $filter, userId: $userId) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteUserFeedbackSubscriptionVariables,
+  APITypes.OnDeleteUserFeedbackSubscription
 >;
 export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats(
   $filter: ModelSubscriptionUserStatsFilterInput
@@ -249,11 +285,12 @@ export const onUpdateUserAcheivements = /* GraphQL */ `subscription OnUpdateUser
   $userId: String
 ) {
   onUpdateUserAcheivements(filter: $filter, userId: $userId) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -262,6 +299,23 @@ export const onUpdateUserAcheivements = /* GraphQL */ `subscription OnUpdateUser
 ` as GeneratedSubscription<
   APITypes.OnUpdateUserAcheivementsSubscriptionVariables,
   APITypes.OnUpdateUserAcheivementsSubscription
+>;
+export const onUpdateUserFeedback = /* GraphQL */ `subscription OnUpdateUserFeedback(
+  $filter: ModelSubscriptionUserFeedbackFilterInput
+  $userId: String
+) {
+  onUpdateUserFeedback(filter: $filter, userId: $userId) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateUserFeedbackSubscriptionVariables,
+  APITypes.OnUpdateUserFeedbackSubscription
 >;
 export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats(
   $filter: ModelSubscriptionUserStatsFilterInput
