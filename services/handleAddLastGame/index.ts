@@ -7,7 +7,8 @@ Amplify.configure(outputs)
 const client = generateClient<Schema>()
 
 export default async (
-  lastDailyGame: Schema['UserTests']['type'] | undefined
+  lastDailyGame: Schema['UserTests']['type'] | undefined,
+  userId: string
 ) => {
   if (!lastDailyGame) {
     return
@@ -44,6 +45,7 @@ export default async (
   if (lastDailyGame.testId) {
     await client.models.UserTests.create({
       ...lastDailyGame,
+      userId,
     })
   }
 }

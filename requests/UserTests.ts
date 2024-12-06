@@ -4,6 +4,7 @@ import { Schema } from '@/amplify/data/resource'
 import { Amplify } from 'aws-amplify'
 import outputs from '@/amplify_outputs.json'
 import { enqueueSnackbar } from 'notistack'
+import { getCurrentUser } from 'aws-amplify/auth'
 
 Amplify.configure(outputs, { ssr: true })
 const client = generateClient<Schema>()
@@ -19,6 +20,8 @@ export const upsertUserTest = async (upsertUserTest: {
   if (!upsertUserTest.testId) {
     throw new Error('testId is required')
   }
+
+  const user = await getCurrentUser()
 
   const { data, errors } = await client.models.UserTests.list({
     filter: {
@@ -55,11 +58,13 @@ export const upsertUserTest = async (upsertUserTest: {
     return await client.models.UserTests.update({
       id: data[0].id,
       ...upsertUserTest,
+      userId: user.username,
     })
   } else {
     return await client.models.UserTests.create({
       id: uuidv4(),
       ...upsertUserTest,
+      userId: user.username,
     })
   }
 }

@@ -54,6 +54,12 @@ export default [
     id: uuidv4(),
     title: 'User Acheivements',
     content: `Let users track achievements, maybe custom pokeballs for first x users, etc.`,
+    dateCompleted: new Date('2024-12-05'),
+  },
+  {
+    id: uuidv4(),
+    title: 'User Notifications',
+    content: `Remind Users daily to play.`,
   },
   {
     id: uuidv4(),

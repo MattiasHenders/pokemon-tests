@@ -32,7 +32,7 @@ export default async (client: V6Client<Schema>, record: DynamoDBRecord) => {
       variables: {
         filter: {
           userId: {
-            eq: userId,
+            eq: userId.split(':')[0],
           },
         },
       },
@@ -45,12 +45,13 @@ export default async (client: V6Client<Schema>, record: DynamoDBRecord) => {
     if (record.eventName === 'INSERT') {
       await milestoneAchievementsCheck(client, userAcheivements)
       await streakAchievementsCheck(client, userAcheivements, userTests, record)
-      await winStreakAchievementsCheck(
-        client,
-        userAcheivements,
-        userTests,
-        record
-      )
     }
+
+    // Only check these acheivements when a test is completed/modified
+    if (record.eventName === 'MODIFY') {
+    }
+
+    // Only check these acheivements when a test is either completed or modified
+    await winStreakAchievementsCheck(client, userAcheivements, userTests)
   }
 }

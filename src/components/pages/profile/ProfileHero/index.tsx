@@ -21,7 +21,7 @@ export default () => {
     >
       <Box
         sx={{
-          flex: { xs: '', sm: '0 0 30%', md: '0 0 20%' },
+          flex: { xs: '', sm: '0 0 30%', md: '0 0 15%' },
         }}
       >
         <ProfileAvatar />
@@ -38,7 +38,7 @@ export default () => {
       <Box
         sx={{
           display: 'flex',
-          flex: { xs: '0 0 70%', sm: '0 0 70%', md: '0 0 80%' },
+          flex: { xs: '0 0 70%', sm: '0 0 70%', md: '0 0 85%' },
         }}
       >
         <ProfileStats />

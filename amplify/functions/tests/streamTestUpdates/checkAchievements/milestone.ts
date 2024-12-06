@@ -19,6 +19,7 @@ export default async (
     }
 
     const newProgress = (milestoneAchievement.progress || 0) + 1
+    console.log(milestoneAchievementId, newProgress)
 
     await client.graphql({
       query: updateUserAcheivements,
