@@ -23,7 +23,7 @@ export default () => {
       try {
         const { data: userAcheivements, errors } =
           await client.models.UserAcheivements.list({
-            limit: 5,
+            limit: 2,
           })
 
         if (errors) {
@@ -55,7 +55,14 @@ export default () => {
       ) : userAcheivements.length === 0 ? (
         <EmptyAcheivements />
       ) : (
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            width: '100%',
+          }}
+        >
           {userAcheivements.map((userAcheivement) => (
             <SingleAcheievement
               key={userAcheivement.id}

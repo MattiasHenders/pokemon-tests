@@ -50,11 +50,12 @@ export const getDailyTest = /* GraphQL */ `query GetDailyTest($id: ID!) {
 >;
 export const getUserAcheivements = /* GraphQL */ `query GetUserAcheivements($id: ID!) {
   getUserAcheivements(id: $id) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -63,6 +64,20 @@ export const getUserAcheivements = /* GraphQL */ `query GetUserAcheivements($id:
 ` as GeneratedQuery<
   APITypes.GetUserAcheivementsQueryVariables,
   APITypes.GetUserAcheivementsQuery
+>;
+export const getUserFeedback = /* GraphQL */ `query GetUserFeedback($id: ID!) {
+  getUserFeedback(id: $id) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetUserFeedbackQueryVariables,
+  APITypes.GetUserFeedbackQuery
 >;
 export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
   getUserStats(id: $id) {
@@ -140,11 +155,12 @@ export const listUserAcheivements = /* GraphQL */ `query ListUserAcheivements(
     sortDirection: $sortDirection
   ) {
     items {
+      acheivementId
+      completed
       createdAt
-      description
       id
-      image
-      name
+      progress
+      total
       updatedAt
       userId
       __typename
@@ -156,6 +172,36 @@ export const listUserAcheivements = /* GraphQL */ `query ListUserAcheivements(
 ` as GeneratedQuery<
   APITypes.ListUserAcheivementsQueryVariables,
   APITypes.ListUserAcheivementsQuery
+>;
+export const listUserFeedbacks = /* GraphQL */ `query ListUserFeedbacks(
+  $filter: ModelUserFeedbackFilterInput
+  $id: ID
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listUserFeedbacks(
+    filter: $filter
+    id: $id
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      createdAt
+      feedback
+      id
+      updatedAt
+      userId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListUserFeedbacksQueryVariables,
+  APITypes.ListUserFeedbacksQuery
 >;
 export const listUserStats = /* GraphQL */ `query ListUserStats(
   $filter: ModelUserStatsFilterInput

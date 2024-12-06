@@ -355,24 +355,31 @@
               "isRequired": false,
               "attributes": []
             },
-            "name": {
-              "name": "name",
+            "acheivementId": {
+              "name": "acheivementId",
               "isArray": false,
               "type": "String",
               "isRequired": false,
               "attributes": []
             },
-            "description": {
-              "name": "description",
+            "completed": {
+              "name": "completed",
               "isArray": false,
-              "type": "String",
+              "type": "Boolean",
               "isRequired": false,
               "attributes": []
             },
-            "image": {
-              "name": "image",
+            "progress": {
+              "name": "progress",
               "isArray": false,
-              "type": "String",
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "total": {
+              "name": "total",
+              "isArray": false,
+              "type": "Int",
               "isRequired": false,
               "attributes": []
             },
