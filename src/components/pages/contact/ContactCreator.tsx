@@ -21,7 +21,10 @@ export default () => {
 
   const handleSubmitFeedback = async () => {
     try {
-      await client.models.UserFeedback.create({ feedback })
+      await client.models.UserFeedback.create({
+        userId: user?.username,
+        feedback,
+      })
 
       enqueueSnackbar('Feedback submitted', { variant: 'success' })
       setFeedback('')

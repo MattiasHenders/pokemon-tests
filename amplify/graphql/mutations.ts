@@ -56,11 +56,12 @@ export const createUserAcheivements = /* GraphQL */ `mutation CreateUserAcheivem
   $input: CreateUserAcheivementsInput!
 ) {
   createUserAcheivements(condition: $condition, input: $input) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -69,6 +70,23 @@ export const createUserAcheivements = /* GraphQL */ `mutation CreateUserAcheivem
 ` as GeneratedMutation<
   APITypes.CreateUserAcheivementsMutationVariables,
   APITypes.CreateUserAcheivementsMutation
+>;
+export const createUserFeedback = /* GraphQL */ `mutation CreateUserFeedback(
+  $condition: ModelUserFeedbackConditionInput
+  $input: CreateUserFeedbackInput!
+) {
+  createUserFeedback(condition: $condition, input: $input) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateUserFeedbackMutationVariables,
+  APITypes.CreateUserFeedbackMutation
 >;
 export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
   $condition: ModelUserStatsConditionInput
@@ -157,11 +175,12 @@ export const deleteUserAcheivements = /* GraphQL */ `mutation DeleteUserAcheivem
   $input: DeleteUserAcheivementsInput!
 ) {
   deleteUserAcheivements(condition: $condition, input: $input) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -170,6 +189,23 @@ export const deleteUserAcheivements = /* GraphQL */ `mutation DeleteUserAcheivem
 ` as GeneratedMutation<
   APITypes.DeleteUserAcheivementsMutationVariables,
   APITypes.DeleteUserAcheivementsMutation
+>;
+export const deleteUserFeedback = /* GraphQL */ `mutation DeleteUserFeedback(
+  $condition: ModelUserFeedbackConditionInput
+  $input: DeleteUserFeedbackInput!
+) {
+  deleteUserFeedback(condition: $condition, input: $input) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteUserFeedbackMutationVariables,
+  APITypes.DeleteUserFeedbackMutation
 >;
 export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
   $condition: ModelUserStatsConditionInput
@@ -258,11 +294,12 @@ export const updateUserAcheivements = /* GraphQL */ `mutation UpdateUserAcheivem
   $input: UpdateUserAcheivementsInput!
 ) {
   updateUserAcheivements(condition: $condition, input: $input) {
+    acheivementId
+    completed
     createdAt
-    description
     id
-    image
-    name
+    progress
+    total
     updatedAt
     userId
     __typename
@@ -271,6 +308,23 @@ export const updateUserAcheivements = /* GraphQL */ `mutation UpdateUserAcheivem
 ` as GeneratedMutation<
   APITypes.UpdateUserAcheivementsMutationVariables,
   APITypes.UpdateUserAcheivementsMutation
+>;
+export const updateUserFeedback = /* GraphQL */ `mutation UpdateUserFeedback(
+  $condition: ModelUserFeedbackConditionInput
+  $input: UpdateUserFeedbackInput!
+) {
+  updateUserFeedback(condition: $condition, input: $input) {
+    createdAt
+    feedback
+    id
+    updatedAt
+    userId
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateUserFeedbackMutationVariables,
+  APITypes.UpdateUserFeedbackMutation
 >;
 export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
   $condition: ModelUserStatsConditionInput

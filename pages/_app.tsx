@@ -12,6 +12,7 @@ import posthog from 'posthog-js'
 import handleAddLastGame from '@/services/handleAddLastGame'
 import { useDailyTestStore } from '@/src/stores/daily'
 import { SnackbarProvider } from 'notistack'
+import { getCurrentUser } from 'aws-amplify/auth'
 
 Amplify.configure(outputs, { ssr: true })
 
@@ -27,7 +28,8 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     if (triggerUserTestCreateOnSignin) {
       const handleAddLastGameOnSignin = async () => {
-        await handleAddLastGame(lastDailyGame)
+        const user = await getCurrentUser()
+        await handleAddLastGame(lastDailyGame, user.username)
       }
 
       handleAddLastGameOnSignin()

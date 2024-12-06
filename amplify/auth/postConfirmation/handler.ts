@@ -3,7 +3,11 @@ import { type Schema } from '../../data/resource'
 import { Amplify } from 'aws-amplify'
 import { generateClient } from 'aws-amplify/data'
 import { env } from '$amplify/env/post-confirmation'
-import { createUserStats } from '../../graphql/mutations'
+import {
+  createUserAcheivements,
+  createUserStats,
+} from '../../graphql/mutations'
+import allAchievements from '../../../src/data/achievements'
 
 Amplify.configure(
   {
@@ -36,6 +40,7 @@ Amplify.configure(
 const client = generateClient<Schema>()
 
 export const handler: PostConfirmationTriggerHandler = async (event) => {
+  // Create user stats
   await client.graphql({
     query: createUserStats,
     variables: {
@@ -46,6 +51,22 @@ export const handler: PostConfirmationTriggerHandler = async (event) => {
       },
     },
   })
+
+  // Create user achievements
+  for (const acheivement of allAchievements) {
+    await client.graphql({
+      query: createUserAcheivements,
+      variables: {
+        input: {
+          userId: event.userName,
+          acheivementId: acheivement.id,
+          completed: false,
+          progress: 0,
+          total: acheivement.total,
+        },
+      },
+    })
+  }
 
   return event
 }
