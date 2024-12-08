@@ -121,9 +121,7 @@ export const handler: DynamoDBStreamHandler = async (event) => {
 
           let maxStreak = 0
           let currentStreak = orderedUserTests[0].points === 150 ? 1 : 0
-          console.log('acheivement', acheivement.id, 'start')
           for (let i = 1; i < orderedUserTests.length; i++) {
-            console.log('acheivement', i, orderedUserTests[i])
             const previousTest = orderedUserTests[i - 1]
             const currentTest = orderedUserTests[i]
 
@@ -143,14 +141,6 @@ export const handler: DynamoDBStreamHandler = async (event) => {
                 secondMostRecentDate.getDate() === yesterday.getDate()
               )
             })()
-
-            console.log(
-              'acheivement',
-              acheivement.id,
-              areTestsTodayAndYesterday,
-              currentTest,
-              previousTest
-            )
 
             if (
               areTestsTodayAndYesterday &&
