@@ -1,13 +1,14 @@
+import { palette } from '@/styles/palette'
 import { Achievement } from '.'
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon'
 
 export const streakAchievement1: Achievement = {
   id: 'streak-1',
-  name: 'Pokémon Fan Club Member',
+  name: 'Club Member',
   description: 'Play 5 days in a row',
   image: {
     size: 42,
-    color: '#fff',
+    color: palette.trophies.bronze,
     src: CatchingPokemonIcon,
   },
   total: 5,
@@ -18,8 +19,8 @@ export const streakAchievement2: Achievement = {
   name: 'Super Nerd',
   description: 'Play 14 days in a row',
   image: {
-    size: 42,
-    color: '#fff',
+    size: 52,
+    color: palette.trophies.silver,
     src: CatchingPokemonIcon,
   },
   total: 14,
@@ -30,8 +31,8 @@ export const streakAchievement3: Achievement = {
   name: 'Poké Maniac',
   description: 'Play 30 days in a row',
   image: {
-    size: 42,
-    color: '#fff',
+    size: 62,
+    color: palette.trophies.gold,
     src: CatchingPokemonIcon,
   },
   total: 30,
