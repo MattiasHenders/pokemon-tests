@@ -11,12 +11,17 @@ import {
 } from '@mui/material'
 
 import allAcheivements from '@/src/data/achievements/index'
+import { useState } from 'react'
+import AchievmentModal from './AchievmentModal'
 
 export default ({
   acheivement,
+  isOnAchievementScreen,
 }: {
   acheivement: Schema['UserAcheivements']['type']
+  isOnAchievementScreen?: boolean
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const localAcheivement = allAcheivements.find(
     (a) => a.id === acheivement.acheivementId
   )
@@ -25,17 +30,28 @@ export default ({
     return null
   }
 
+  const handleClickOnAcheivementPage = () => {
+    if (isOnAchievementScreen) {
+      setIsModalOpen(true)
+    }
+  }
+
   return (
     <Box
       sx={{
-        width: '100%',
         display: 'flex',
         justifyContent: 'space-around',
       }}
     >
       <Tooltip
+        disableHoverListener={isOnAchievementScreen}
         title={
-          <Box sx={{ textAlign: 'center', p: 1 }}>
+          <Box
+            sx={{
+              textAlign: 'center',
+              p: 1,
+            }}
+          >
             <Typography variant="body2">
               {localAcheivement.description}
             </Typography>
@@ -45,23 +61,27 @@ export default ({
       >
         <Paper
           elevation={3}
+          onClick={handleClickOnAcheivementPage}
           sx={{
             p: 1,
-            rowGap: 2,
             display: 'flex',
             flexDirection: 'column',
             width: 150,
             height: 150,
-            border: `2px solid ${palette.background.light}`,
-            backgroundColor: alpha(palette.background.light, 0.3),
-            justifyContent: 'center',
+            border: `2px solid ${localAcheivement.image.color}`,
+            backgroundColor: alpha(localAcheivement.image.color, 0.1),
+            justifyContent: 'space-between',
             alignItems: 'center',
+            opacity: !isOnAchievementScreen || acheivement.completed ? 1 : 0.15,
+            '&:hover': {
+              cursor: 'pointer',
+            },
           }}
         >
           <Typography
             variant="body1"
             sx={{
-              color: palette.primary.lightText,
+              color: localAcheivement.image.color,
               textAlign: 'center',
               fontSize: { xs: 14, sm: 16, md: 18 },
             }}
@@ -80,6 +100,11 @@ export default ({
             sx={{
               width: '100%',
               mt: 2,
+              mb: 1,
+              backgroundColor: alpha(localAcheivement.image.color, 0.3),
+              '& .MuiLinearProgress-bar': {
+                backgroundColor: localAcheivement.image.color,
+              },
             }}
             value={
               ((acheivement.progress || 0) / (acheivement.total || 1)) * 100
@@ -87,6 +112,12 @@ export default ({
           />
         </Paper>
       </Tooltip>
+      <AchievmentModal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        acheivement={acheivement}
+        localAcheivement={localAcheivement}
+      />
     </Box>
   )
 }

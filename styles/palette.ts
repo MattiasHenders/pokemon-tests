@@ -31,4 +31,13 @@ export const palette = {
     light: '#ff4569',
     dark: '#b2102f',
   },
+  trophies: {
+    bronze: '#A97142',
+    silver: '#C0C0C0',
+    gold: '#FFD700',
+    platinum: '#E5E4E2',
+    ruby: '#E0115F',
+    emerald: '#50C878',
+    diamond: '#B9F2FF',
+  },
 }

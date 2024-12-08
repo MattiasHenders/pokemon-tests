@@ -1,10 +1,9 @@
-import { Box, Container, Typography } from '@mui/material'
+import { Container } from '@mui/material'
 import { NextPage } from 'next'
 import { Authenticator } from '@aws-amplify/ui-react'
 import AuthenticatorComponents from '@/src/components/common/Authenticator'
-import ProfileHeader from '@/src/components/pages/profile/index/ProfileHeader'
-import ProfileHero from '@/src/components/pages/profile/index/ProfileHero'
-import ProfileTable from '@/src/components/pages/profile/index/ProfileTable'
+import AcheivementsDisplay from '@/src/components/pages/profile/achievements/AcheivementsDisplay'
+import AchievementsHeader from '@/src/components/pages/profile/achievements/AchievementsHeader'
 
 const ProfilePage: NextPage = () => {
   return (
@@ -17,9 +16,8 @@ const ProfilePage: NextPage = () => {
           py: 3,
         }}
       >
-        <ProfileHeader />
-        <ProfileHero />
-        <ProfileTable />
+        <AchievementsHeader />
+        <AcheivementsDisplay />
       </Container>
     </Authenticator>
   )
