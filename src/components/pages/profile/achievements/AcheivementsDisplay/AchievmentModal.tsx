@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import { Schema } from '@/amplify/data/resource'
 import { Paper, alpha, Icon, LinearProgress, darken } from '@mui/material'
 import { Achievement } from '@/src/data/achievements'
+import { palette } from '@/styles/palette'
 
 interface AcheivementModalProps {
   isOpen: boolean

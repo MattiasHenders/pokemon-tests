@@ -1,4 +1,3 @@
-import { palette } from '@/styles/palette'
 import { Achievement } from '.'
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon'
 
@@ -8,7 +7,7 @@ export const streakAchievement1: Achievement = {
   description: 'Play 5 days in a row',
   image: {
     size: 42,
-    color: palette.trophies.bronze,
+    color: 'bronze',
     src: CatchingPokemonIcon,
   },
   total: 5,
@@ -20,7 +19,7 @@ export const streakAchievement2: Achievement = {
   description: 'Play 14 days in a row',
   image: {
     size: 52,
-    color: palette.trophies.silver,
+    color: 'silver',
     src: CatchingPokemonIcon,
   },
   total: 14,
@@ -32,7 +31,7 @@ export const streakAchievement3: Achievement = {
   description: 'Play 30 days in a row',
   image: {
     size: 62,
-    color: palette.trophies.gold,
+    color: 'gold',
     src: CatchingPokemonIcon,
   },
   total: 30,
