@@ -5,6 +5,7 @@ import functions from './functions/resources'
 import { Stack } from 'aws-cdk-lib'
 import { Policy, PolicyStatement, Effect } from 'aws-cdk-lib/aws-iam'
 import { EventSourceMapping, StartingPosition } from 'aws-cdk-lib/aws-lambda'
+import * as iam from 'aws-cdk-lib/aws-iam'
 
 const backend = defineBackend({
   auth,
@@ -46,3 +47,22 @@ const mapping = new EventSourceMapping(
 )
 
 mapping.node.addDependency(policy)
+
+const notifyUsersDailyFunction = backend.notifyUsersDaily.resources.lambda
+notifyUsersDailyFunction.role?.attachInlinePolicy(
+  new iam.Policy(backend.auth.resources.userPool, 'AllowListUsers', {
+    statements: [
+      new iam.PolicyStatement({
+        actions: ['cognito-idp:ListUsers'],
+        resources: [backend.auth.resources.userPool.userPoolArn],
+      }),
+    ],
+  })
+)
+
+notifyUsersDailyFunction.addToRolePolicy(
+  new PolicyStatement({
+    actions: ['ses:SendEmail', 'ses:SendRawEmail'],
+    resources: ['*'],
+  })
+)

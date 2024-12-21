@@ -1,5 +1,5 @@
 import { Schema } from '@/amplify/data/resource'
-import { palette } from '@/styles/palette'
+import { getTrophyColor, palette } from '@/styles/palette'
 import {
   alpha,
   Box,
@@ -68,8 +68,11 @@ export default ({
             flexDirection: 'column',
             width: 150,
             height: 150,
-            border: `2px solid ${localAcheivement.image.color}`,
-            backgroundColor: alpha(localAcheivement.image.color, 0.1),
+            border: `2px solid ${getTrophyColor(localAcheivement.image.color)}`,
+            backgroundColor: alpha(
+              getTrophyColor(localAcheivement.image.color),
+              0.1
+            ),
             justifyContent: 'space-between',
             alignItems: 'center',
             opacity: !isOnAchievementScreen || acheivement.completed ? 1 : 0.15,
@@ -81,7 +84,7 @@ export default ({
           <Typography
             variant="body1"
             sx={{
-              color: localAcheivement.image.color,
+              color: getTrophyColor(localAcheivement.image.color),
               textAlign: 'center',
               fontSize: { xs: 14, sm: 16, md: 18 },
             }}
@@ -90,7 +93,7 @@ export default ({
           </Typography>
           <Icon
             sx={{
-              color: localAcheivement.image.color,
+              color: getTrophyColor(localAcheivement.image.color),
               fontSize: localAcheivement.image.size,
             }}
             component={localAcheivement.image.src}
@@ -101,9 +104,12 @@ export default ({
               width: '100%',
               mt: 2,
               mb: 1,
-              backgroundColor: alpha(localAcheivement.image.color, 0.3),
+              backgroundColor: alpha(
+                getTrophyColor(localAcheivement.image.color),
+                0.3
+              ),
               '& .MuiLinearProgress-bar': {
-                backgroundColor: localAcheivement.image.color,
+                backgroundColor: getTrophyColor(localAcheivement.image.color),
               },
             }}
             value={

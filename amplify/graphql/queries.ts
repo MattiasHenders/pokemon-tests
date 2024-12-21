@@ -83,6 +83,7 @@ export const getUserStats = /* GraphQL */ `query GetUserStats($id: ID!) {
   getUserStats(id: $id) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -102,6 +103,7 @@ export const getUserTests = /* GraphQL */ `query GetUserTests($id: ID!) {
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId
@@ -220,6 +222,7 @@ export const listUserStats = /* GraphQL */ `query ListUserStats(
     items {
       createdAt
       id
+      isSubscribed
       points
       pokemonCaught
       updatedAt
@@ -255,6 +258,7 @@ export const listUserTests = /* GraphQL */ `query ListUserTests(
       impossibleAnswer
       mediumAnswer
       points
+      test
       testId
       updatedAt
       userId

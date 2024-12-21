@@ -2,10 +2,9 @@ import { Container } from '@mui/material'
 import { NextPage } from 'next'
 import { Authenticator } from '@aws-amplify/ui-react'
 import AuthenticatorComponents from '@/src/components/common/Authenticator'
-import AcheivementsDisplay from '@/src/components/features/profile/achievements/AcheivementsDisplay'
-import AchievementsHeader from '@/src/components/features/profile/achievements/AchievementsHeader'
+import UnsubscribeCTA from '@/src/components/features/profile/unsubscribe/UnsubscribeCTA'
 
-const ProfilePage: NextPage = () => {
+const UnsubscribePage: NextPage = () => {
   return (
     <Authenticator components={AuthenticatorComponents}>
       <Container
@@ -16,11 +15,10 @@ const ProfilePage: NextPage = () => {
           py: 3,
         }}
       >
-        <AchievementsHeader />
-        <AcheivementsDisplay />
+        <UnsubscribeCTA />
       </Container>
     </Authenticator>
   )
 }
 
-export default ProfilePage
+export default UnsubscribePage

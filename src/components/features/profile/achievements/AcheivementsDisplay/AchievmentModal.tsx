@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography'
 import { Schema } from '@/amplify/data/resource'
 import { Paper, alpha, Icon, LinearProgress, darken } from '@mui/material'
 import { Achievement } from '@/src/data/achievements'
+import { getTrophyColor, palette } from '@/styles/palette'
 
 interface AcheivementModalProps {
   isOpen: boolean
@@ -55,7 +56,10 @@ export default ({
               flexDirection: 'column',
               width: 275,
               height: 275,
-              backgroundColor: darken(localAcheivement.image.color, 0.6),
+              backgroundColor: darken(
+                getTrophyColor(localAcheivement.image.color),
+                0.6
+              ),
               justifyContent: 'space-between',
               alignItems: 'center',
             }}
@@ -64,7 +68,7 @@ export default ({
               <Typography
                 variant="body1"
                 sx={{
-                  color: localAcheivement.image.color,
+                  color: getTrophyColor(localAcheivement.image.color),
                   textAlign: 'center',
                   fontSize: 22,
                   mb: 1,
@@ -75,7 +79,7 @@ export default ({
               <Typography
                 variant="body1"
                 sx={{
-                  color: localAcheivement.image.color,
+                  color: getTrophyColor(localAcheivement.image.color),
                   textAlign: 'center',
                   fontSize: 18,
                 }}
@@ -85,7 +89,7 @@ export default ({
             </Box>
             <Icon
               sx={{
-                color: localAcheivement.image.color,
+                color: getTrophyColor(localAcheivement.image.color),
                 fontSize: localAcheivement.image.size + 50,
               }}
               component={localAcheivement.image.src}
@@ -94,7 +98,7 @@ export default ({
               <Typography
                 variant="body1"
                 sx={{
-                  color: localAcheivement.image.color,
+                  color: getTrophyColor(localAcheivement.image.color),
                   textAlign: 'center',
                   fontSize: 18,
                 }}
@@ -107,9 +111,14 @@ export default ({
                   width: '100%',
                   mt: 2,
                   mb: 1,
-                  backgroundColor: alpha(localAcheivement.image.color, 0.3),
+                  backgroundColor: alpha(
+                    getTrophyColor(localAcheivement.image.color),
+                    0.3
+                  ),
                   '& .MuiLinearProgress-bar': {
-                    backgroundColor: localAcheivement.image.color,
+                    backgroundColor: getTrophyColor(
+                      localAcheivement.image.color
+                    ),
                   },
                 }}
                 value={

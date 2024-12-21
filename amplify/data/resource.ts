@@ -3,6 +3,7 @@ import { generateDailyPuzzle } from '../functions/tests/generateDailyPuzzle/reso
 import { postConfirmation } from '../auth/postConfirmation/resource'
 import { streamTestUpdates } from '../functions/tests/streamTestUpdates/resource'
 import { backfillAllUserAcheivements } from '../functions/backfills/backfillAllUserAcheivements/resource'
+import { notifyUsersDaily } from '../functions/notifications/notifyUsersDaily/resource'
 
 const schema = a
   .schema({
@@ -48,6 +49,7 @@ const schema = a
         id: a.id(),
         points: a.integer().default(0),
         pokemonCaught: a.string().array(),
+        isSubscribed: a.boolean().default(true),
       })
       .authorization((allow) => [
         allow.ownerDefinedIn('id').to(['create', 'read', 'update']),
@@ -80,6 +82,7 @@ const schema = a
     allow.resource(postConfirmation).to(['mutate']),
     allow.resource(generateDailyPuzzle).to(['mutate']),
     allow.resource(streamTestUpdates).to(['query', 'mutate']),
+    allow.resource(notifyUsersDaily).to(['query']),
     allow.resource(backfillAllUserAcheivements).to(['query', 'mutate']),
   ])
 
