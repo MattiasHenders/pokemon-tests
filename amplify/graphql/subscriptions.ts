@@ -92,6 +92,7 @@ export const onCreateUserStats = /* GraphQL */ `subscription OnCreateUserStats(
   onCreateUserStats(filter: $filter, id: $id) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -114,6 +115,7 @@ export const onCreateUserTests = /* GraphQL */ `subscription OnCreateUserTests(
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId
@@ -208,6 +210,7 @@ export const onDeleteUserStats = /* GraphQL */ `subscription OnDeleteUserStats(
   onDeleteUserStats(filter: $filter, id: $id) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -230,6 +233,7 @@ export const onDeleteUserTests = /* GraphQL */ `subscription OnDeleteUserTests(
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId
@@ -324,6 +328,7 @@ export const onUpdateUserStats = /* GraphQL */ `subscription OnUpdateUserStats(
   onUpdateUserStats(filter: $filter, id: $id) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -346,6 +351,7 @@ export const onUpdateUserTests = /* GraphQL */ `subscription OnUpdateUserTests(
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId

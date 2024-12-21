@@ -95,6 +95,7 @@ export const createUserStats = /* GraphQL */ `mutation CreateUserStats(
   createUserStats(condition: $condition, input: $input) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -117,6 +118,7 @@ export const createUserTests = /* GraphQL */ `mutation CreateUserTests(
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId
@@ -214,6 +216,7 @@ export const deleteUserStats = /* GraphQL */ `mutation DeleteUserStats(
   deleteUserStats(condition: $condition, input: $input) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -236,6 +239,7 @@ export const deleteUserTests = /* GraphQL */ `mutation DeleteUserTests(
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId
@@ -333,6 +337,7 @@ export const updateUserStats = /* GraphQL */ `mutation UpdateUserStats(
   updateUserStats(condition: $condition, input: $input) {
     createdAt
     id
+    isSubscribed
     points
     pokemonCaught
     updatedAt
@@ -355,6 +360,7 @@ export const updateUserTests = /* GraphQL */ `mutation UpdateUserTests(
     impossibleAnswer
     mediumAnswer
     points
+    test
     testId
     updatedAt
     userId

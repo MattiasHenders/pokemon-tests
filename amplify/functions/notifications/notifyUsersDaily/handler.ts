@@ -66,6 +66,11 @@ export const handler: EventBridgeHandler<
   })
 
   for (const userStat of userStats.listUserStats.items) {
+    // Checking for fasle because undefined is a valid value
+    if (userStat.isSubscribed === false) {
+      continue
+    }
+
     const { data: userTests } = await client.graphql({
       query: listUserTests,
       variables: {

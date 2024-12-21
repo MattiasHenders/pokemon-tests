@@ -49,6 +49,7 @@ const schema = a
         id: a.id(),
         points: a.integer().default(0),
         pokemonCaught: a.string().array(),
+        isSubscribed: a.boolean().default(true),
       })
       .authorization((allow) => [
         allow.ownerDefinedIn('id').to(['create', 'read', 'update']),
