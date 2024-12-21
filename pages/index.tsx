@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { Box } from '@mui/material'
-import QuestionDisplay from '@/src/components/pages/home/QuestionDisplay'
-import FormInputs from '@/src/components/pages/home/FormInputs'
+import QuestionDisplay from '@/src/components/features/home/QuestionDisplay'
+import FormInputs from '@/src/components/features/home/FormInputs'
 import HomeHero from '@/src/components/common/Heros/HomeHero'
-import GuessDisplay from '@/src/components/pages/home/PokemonDisplay/GuessDisplay'
-import AnswerDisplay from '@/src/components/pages/home/PokemonDisplay/AnswerDisplay'
+import GuessDisplay from '@/src/components/features/home/PokemonDisplay/GuessDisplay'
+import AnswerDisplay from '@/src/components/features/home/PokemonDisplay/AnswerDisplay'
 import PokemonSelector from '@/src/components/common/PokemonSelector'
 import type { Schema } from '@/amplify/data/resource'
 import {
@@ -14,8 +14,8 @@ import {
 } from '@/utils/amplifyServerUtils'
 import { GameType } from '@/src/stores/game'
 import GameManager from '@/src/components/common/GameManager'
-import GameTypeDisplay from '@/src/components/pages/home/GameTypeDisplay'
-import GameDoneModal from '@/src/components/pages/home/GameDoneModal'
+import GameTypeDisplay from '@/src/components/features/home/GameTypeDisplay'
+import GameDoneModal from '@/src/components/features/home/GameDoneModal'
 
 interface HomePageProps {
   pokemonQuestions: Schema['DailyTest']['type']

@@ -281,6 +281,13 @@
               "attributes": [],
               "isArrayNullable": true
             },
+            "isSubscribed": {
+              "name": "isSubscribed",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
             "createdAt": {
               "name": "createdAt",
               "isArray": false,

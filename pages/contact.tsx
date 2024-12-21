@@ -2,8 +2,8 @@ import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { Box, Divider } from '@mui/material'
 import HomeHero from '@/src/components/common/Heros/HomeHero'
-import ContactCreator from '@/src/components/pages/contact/ContactCreator'
-import ContactThanksToPokeTests from '@/src/components/pages/contact/ContactThanksToPokeTests'
+import ContactCreator from '@/src/components/features/contact/ContactCreator'
+import ContactThanksToPokeTests from '@/src/components/features/contact/ContactThanksToPokeTests'
 import { palette } from '@/styles/palette'
 
 interface ContactPageProps {}

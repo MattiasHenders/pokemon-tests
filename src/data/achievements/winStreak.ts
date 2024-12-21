@@ -1,4 +1,3 @@
-import { palette } from '@/styles/palette'
 import { Achievement } from '.'
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment'
 
@@ -8,7 +7,7 @@ export const winStreakAchievement1: Achievement = {
   description: 'Beat an Impossible Test 2 days in a row',
   image: {
     size: 42,
-    color: palette.trophies.bronze,
+    color: 'bronze',
     src: LocalFireDepartmentIcon,
   },
   total: 2,
@@ -20,7 +19,7 @@ export const winStreakAchievement2: Achievement = {
   description: 'Beat an Impossible Test 7 days in a row',
   image: {
     size: 48,
-    color: palette.trophies.silver,
+    color: 'silver',
     src: LocalFireDepartmentIcon,
   },
   total: 7,
@@ -32,7 +31,7 @@ export const winStreakAchievement3: Achievement = {
   description: 'Beat an Impossible Test 10 days in a row',
   image: {
     size: 56,
-    color: palette.trophies.gold,
+    color: 'gold',
     src: LocalFireDepartmentIcon,
   },
   total: 10,
@@ -44,7 +43,7 @@ export const winStreakAchievement4: Achievement = {
   description: 'Beat an Impossible Test 15 days in a row',
   image: {
     size: 62,
-    color: palette.trophies.platinum,
+    color: 'platinum',
     src: LocalFireDepartmentIcon,
   },
   total: 15,

@@ -15,6 +15,7 @@ import UserIcon from '@mui/icons-material/HowToReg'
 import LoginIcon from '@mui/icons-material/Login'
 import Link from 'next/link'
 import LogoutIcon from '@mui/icons-material/Logout'
+import EmailIcon from '@mui/icons-material/Email'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 
 interface UserMenuProps {
@@ -92,6 +93,33 @@ export default ({
                 }}
               >
                 Account Details
+              </Typography>
+            </MenuItem>
+          </Link>
+        )}
+        {user && (
+          <Link href={'/profile/email-settings'}>
+            <MenuItem
+              onClick={handleCloseUserMenu}
+              sx={{
+                backgroundColor: palette.primary.light,
+                '&:hover': {
+                  backgroundColor: alpha(palette.primary.light, 0.8),
+                },
+              }}
+            >
+              <Icon
+                sx={{ mr: 2, color: palette.primary.dark }}
+                color="primary"
+                component={EmailIcon}
+              />
+              <Typography
+                sx={{
+                  textAlign: 'center',
+                  color: palette.primary.darkText,
+                }}
+              >
+                Email Settings
               </Typography>
             </MenuItem>
           </Link>
