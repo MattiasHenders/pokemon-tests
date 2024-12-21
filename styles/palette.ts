@@ -1,3 +1,5 @@
+import { get } from 'http'
+
 export const palette = {
   primary: {
     main: '#6B9080',
@@ -40,4 +42,8 @@ export const palette = {
     emerald: '#50C878',
     diamond: '#B9F2FF',
   },
+}
+
+export const getTrophyColor = (tier: string) => {
+  return palette.trophies[tier as keyof typeof palette.trophies]
 }

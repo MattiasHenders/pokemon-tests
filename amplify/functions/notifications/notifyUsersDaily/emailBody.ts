@@ -91,7 +91,7 @@ export default `<!doctype html>
       <div class="footer">
         You are receiving this email because you signed up for PokeTest. <br />
         If you wish to unsubscribe,
-        <a href="https://poketests.com/unsubscribe" target="_blank"
+        <a href="https://poketests.com/profile/email-settings" target="_blank"
           >click here</a
         >.
       </div>

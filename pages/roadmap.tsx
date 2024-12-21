@@ -2,7 +2,7 @@ import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { Container } from '@mui/material'
 import HomeHero from '@/src/components/common/Heros/HomeHero'
-import Roadmap from '@/src/components/pages/roadmap/Roadmap'
+import Roadmap from '@/src/components/features/roadmap/Roadmap'
 
 interface RoadmapPageProps {}
 
