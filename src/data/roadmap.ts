@@ -60,6 +60,7 @@ export default [
     id: uuidv4(),
     title: 'User Notifications',
     content: `Remind Users daily to play.`,
+    dateCompleted: new Date('2024-12-21'),
   },
   {
     id: uuidv4(),
