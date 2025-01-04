@@ -29,7 +29,7 @@ export default [
   {
     id: uuidv4(),
     title: 'Daily Puzzle',
-    content: `Create a daily puzzle system. Notify users if they are about to miss a daily puzzle`,
+    content: `Create a daily puzzle system.`,
     dateCompleted: new Date('2024-11-22'),
   },
   {

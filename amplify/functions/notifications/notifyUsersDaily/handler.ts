@@ -65,11 +65,15 @@ export const handler: EventBridgeHandler<
     }
   })
 
+  console.log('allUsers', allUsers.Users)
+
   for (const userStat of userStats.listUserStats.items) {
     // Checking for fasle because undefined is a valid value
     if (userStat.isSubscribed === false) {
       continue
     }
+
+    console.log('user is subscribed', userStat.id)
 
     const { data: userTests } = await client.graphql({
       query: listUserTests,
@@ -113,7 +117,17 @@ export const handler: EventBridgeHandler<
       continue
     } else {
       const recipientEmail = userIdEmailMap.get(userStat.id) as string
-      await sendEmail({ recipientEmail })
+
+      try {
+        console.log('Sending email to', recipientEmail)
+        await sendEmail({ recipientEmail })
+        console.log('Successfully sent email to', recipientEmail)
+      } catch (error) {
+        console.error(`Error sending email to ${recipientEmail}: ${error}`)
+        throw new Error(`Failed to send email to ${recipientEmail}`, {
+          cause: error,
+        })
+      }
     }
   }
 }
