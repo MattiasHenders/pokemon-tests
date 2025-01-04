@@ -3,11 +3,7 @@ import type { EventBridgeHandler } from 'aws-lambda'
 import { Schema } from '../../../data/resource'
 import { Amplify } from 'aws-amplify'
 import { env } from '$amplify/env/notify-users-daily'
-import {
-  listUserAcheivements,
-  listUserStats,
-  listUserTests,
-} from '../../../graphql/queries'
+import { listUserStats, listUserTests } from '../../../graphql/queries'
 import listAllCognitoUsers from './listAllUsers'
 import sendEmail from './sendEmail'
 import { UserType } from '@aws-sdk/client-cognito-identity-provider'
@@ -86,6 +82,8 @@ export const handler: EventBridgeHandler<
       },
     })
 
+    console.log('userTests found')
+
     const orderedUserTests = userTests.listUserTests.items.sort((a, b) => {
       if (!a.createdAt) return 1 // Treat null as older
       if (!b.createdAt) return -1
@@ -94,6 +92,8 @@ export const handler: EventBridgeHandler<
         new Date(a.createdAt).getMilliseconds()
       )
     })
+
+    console.log('userTests ordered')
 
     if (orderedUserTests.length !== 0) {
       const mostRecentTest = orderedUserTests[0]
@@ -116,6 +116,7 @@ export const handler: EventBridgeHandler<
     if (!userIdEmailMap.has(userStat.id)) {
       continue
     } else {
+      console.log('in else statement')
       const recipientEmail = userIdEmailMap.get(userStat.id) as string
 
       try {
