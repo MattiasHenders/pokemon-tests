@@ -115,7 +115,6 @@ export const onCreateUserTests = /* GraphQL */ `subscription OnCreateUserTests(
     impossibleAnswer
     mediumAnswer
     points
-    test
     testId
     updatedAt
     userId
@@ -233,7 +232,6 @@ export const onDeleteUserTests = /* GraphQL */ `subscription OnDeleteUserTests(
     impossibleAnswer
     mediumAnswer
     points
-    test
     testId
     updatedAt
     userId
@@ -351,7 +349,6 @@ export const onUpdateUserTests = /* GraphQL */ `subscription OnUpdateUserTests(
     impossibleAnswer
     mediumAnswer
     points
-    test
     testId
     updatedAt
     userId

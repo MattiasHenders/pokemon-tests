@@ -61,38 +61,25 @@ export const handler: EventBridgeHandler<
     }
   })
 
-  console.log('allUsers', allUsers.Users)
-
   for (const userStat of userStats.listUserStats.items) {
     // Checking for fasle because undefined is a valid value
     if (userStat.isSubscribed === false) {
+      console.log('User is not subscribed', userStat.id)
       continue
     }
 
-    console.log('user is subscribed', userStat.id)
+    console.log('Checking user who is subscribed', userStat.id)
 
-    let userTests
-    try {
-      const { data: foundUserTests } = await client.graphql({
-        query: listUserTests,
-        variables: {
-          filter: {
-            userId: {
-              eq: userStat.id,
-            },
+    const { data: userTests } = await client.graphql({
+      query: listUserTests,
+      variables: {
+        filter: {
+          userId: {
+            eq: userStat.id,
           },
         },
-      })
-
-      userTests = foundUserTests
-    } catch (error) {
-      console.log(JSON.stringify(error, null, 2))
-    }
-
-    if (!userTests) {
-      continue
-    }
-    console.log('userTests found')
+      },
+    })
 
     const orderedUserTests = userTests.listUserTests.items.sort((a, b) => {
       if (!a.createdAt) return 1 // Treat null as older
@@ -102,8 +89,6 @@ export const handler: EventBridgeHandler<
         new Date(a.createdAt).getMilliseconds()
       )
     })
-
-    console.log('userTests ordered')
 
     if (orderedUserTests.length !== 0) {
       const mostRecentTest = orderedUserTests[0]
@@ -118,15 +103,13 @@ export const handler: EventBridgeHandler<
       })()
 
       if (isMostRecentTestToday) {
+        console.log('User has most recent test today', userStat.id)
         return
       }
     }
 
     // At this point send the email
-    if (!userIdEmailMap.has(userStat.id)) {
-      continue
-    } else {
-      console.log('in else statement')
+    if (userIdEmailMap.has(userStat.id)) {
       const recipientEmail = userIdEmailMap.get(userStat.id) as string
 
       try {
@@ -139,6 +122,12 @@ export const handler: EventBridgeHandler<
           cause: error,
         })
       }
+    } else {
+      console.warn(
+        'User has no email mapped, skipping',
+        userStat.id,
+        userIdEmailMap
+      )
     }
   }
 }

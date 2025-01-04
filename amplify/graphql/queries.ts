@@ -103,7 +103,6 @@ export const getUserTests = /* GraphQL */ `query GetUserTests($id: ID!) {
     impossibleAnswer
     mediumAnswer
     points
-    test
     testId
     updatedAt
     userId
@@ -258,7 +257,6 @@ export const listUserTests = /* GraphQL */ `query ListUserTests(
       impossibleAnswer
       mediumAnswer
       points
-      test
       testId
       updatedAt
       userId
