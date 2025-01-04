@@ -71,17 +71,27 @@ export const handler: EventBridgeHandler<
 
     console.log('user is subscribed', userStat.id)
 
-    const { data: userTests } = await client.graphql({
-      query: listUserTests,
-      variables: {
-        filter: {
-          userId: {
-            eq: userStat.id,
+    let userTests
+    try {
+      const { data: foundUserTests } = await client.graphql({
+        query: listUserTests,
+        variables: {
+          filter: {
+            userId: {
+              eq: userStat.id,
+            },
           },
         },
-      },
-    })
+      })
 
+      userTests = foundUserTests
+    } catch (error) {
+      console.log(JSON.stringify(error, null, 2))
+    }
+
+    if (!userTests) {
+      continue
+    }
     console.log('userTests found')
 
     const orderedUserTests = userTests.listUserTests.items.sort((a, b) => {
