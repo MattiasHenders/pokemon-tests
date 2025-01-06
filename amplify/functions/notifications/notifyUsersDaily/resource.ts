@@ -5,6 +5,6 @@ export const notifyUsersDaily = defineFunction({
   name: 'notify-users-daily',
   // optionally specify a path to your handler (defaults to "./handler.ts")
   entry: './handler.ts',
-  schedule: '0 1 * * ? *',
+  schedule: '0 20 * * ? *',
   timeoutSeconds: 45,
 })
